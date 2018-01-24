@@ -11,5 +11,6 @@ public class Test {
         System.out.println(app_key_32);
         System.out.println("操作GIT,测试");
         System.out.println("修改01.24");
+        System.out.println("修改01.24，加入组织！");
     }
 }
