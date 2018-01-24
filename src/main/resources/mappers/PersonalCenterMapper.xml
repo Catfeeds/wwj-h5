@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zww.user.repository.PersonalCenterMapper" >
+
+	<resultMap id="UserInfoMap" type="com.zww.user.vo.UserBaseVo">
+	    <id column="id" property="id" />
+	    <result column="user_id" property="userId" />
+	    <result column="user_name" property="userName" />
+	    <result column="portrait_num" property="portraitNum" />
+	    <result column="experience" property="experience" />
+	    <result column="gold" property="gold" />
+	    <result column="invite_code" property="inviteCode" />
+	    <result column="exchange_code" property="exchangeCode" />
+	    <result column="red_packet_value" property="redPacketValue" />
+  	</resultMap>
+  	
+  	
+  	<resultMap id="UserAwardMap" type="com.zww.user.vo.UserAwardRecords1Vo">
+	    <result column="prize_id" property="prizeId" />
+	    <result column="prize_name" property="prizeName" />
+	    <result column="prize_number" property="prizeNumber" />
+	    <result column="status"  property="prizeStatus" />
+	    <result column="create_time" property="prizeTime" />
+	    <result column="value" property="value" />
+	    <result column="courier_company" property="courierCompany" />
+	    <result column="courier_number" property="courierNumber" />
+  	</resultMap>
+  	
+  	
+  	<!-- 展示用户信息 -->
+	<select id="queryUserInfoByUserId"
+		parameterType="java.lang.String"	
+		resultMap="UserInfoMap">
+		SELECT 
+			user_id, user_name, experience, gold, portrait_num, invite_code
+		FROM 
+			user_base 
+		WHERE
+			user_id = #{id} 
+		AND 
+			effective = '1'
+	</select>
+	
+    <!--用户奖品数量  -->
+    <select id="countRecordByuserId" parameterType="map"
+    	resultType="java.lang.Long">
+       SELECT 
+      		count(*) 
+       FROM 
+       		${tableName} 
+       WHERE 
+	   		user_id = ${userId} 
+	   AND
+	  		effective = '1'
+    </select>
+    
+    <!-- 娃娃图片id列表 -->
+  	<select id="queryUserPrizePic"
+  		parameterType="map"	
+		resultMap="UserAwardMap">
+  		 SELECT 
+		 	prize_id, prize_name
+		 FROM 
+		 	${tableName} 
+		 WHERE 
+		 	user_id = ${userId}
+		 AND
+	  		effective = '1'
+		 ORDER BY  
+		 	create_time 
+		 DESC
+		 LIMIT 
+		 	0, 6
+  	</select>
+  	
+  	<!-- 修改用户昵称 -->
+	<update id="updatePetName"
+		parameterType="com.zww.user.pojo.UserBasePojo">
+		UPDATE 
+			user_base 
+		SET 
+			user_name = #{userName} 
+		WHERE 
+			user_id = #{userId} 
+		AND
+	  		effective = '1'
+	</update>
+	
+	
+	<!--更新金币 -->
+	<update id="updateGoldsByUserId"
+		parameterType="java.lang.String">
+		UPDATE 
+			user_base 
+		SET 
+			gold = gold + 80 
+		WHERE 
+			user_id = #{userId}
+		AND 
+			effective = '1'
+	</update>
+	
+	<!-- 更新用户头像序列号 -->
+	<update id="updateHead"
+		parameterType="java.lang.String">
+		UPDATE 
+			user_base 
+		SET 
+			portrait_num = portrait_num + 1 
+		WHERE 
+			user_id = #{userId}
+		AND 
+			effective = '1'
+	</update>
+	
+	
+	
+</mapper>
