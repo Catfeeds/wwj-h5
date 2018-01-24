@@ -12,5 +12,6 @@ public class Test {
         System.out.println("操作GIT,测试");
         System.out.println("修改01.24");
         System.out.println("修改01.24，加入组织！");
+        System.out.println("@$%$%^$##%^");
     }
 }
