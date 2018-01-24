@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="catchdoll:war">
+    <output-path>$PROJECT_DIR$/../01.22/catchdoll Maven Webapp/target</output-path>
+    <root id="archive" name="catchdoll.war">
+      <element id="artifact" artifact-name="catchdoll:war exploded" />
+    </root>
+  </artifact>
+</component>

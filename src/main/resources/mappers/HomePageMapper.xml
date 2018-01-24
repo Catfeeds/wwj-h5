@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zww.room.repository.HomePageMapper" >
+
+	<!-- 查询当前可用的机器列表 -->
+	<select id="queryMachineList"
+		resultType="com.zww.room.vo.MachineVo">
+		SELECT
+			A.machine_id AS roomId,
+			A.prize_id AS prizeId,
+			A.machine_status AS machineStatus,
+			A.push1 AS push1,
+			A.push2 AS push2,
+			A.red_packet_status AS redPacketStatus,
+			B.prize_name AS prizeName,
+			B.prize_context AS prizeContext,
+			B.play_value AS playValue
+		FROM 
+			machine  A
+		LEFT JOIN 
+			prize B
+		ON
+			  A.prize_id = B.prize_id
+		WHERE 
+			A.is_use = '1'
+		ORDER BY A.update_time  DESC
+	</select>
+
+</mapper>
