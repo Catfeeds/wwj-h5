@@ -26,12 +26,15 @@
    		<property name="driverClassName" value="com.mysql.jdbc.Driver" /><!-- 生产用DB连接信息
         <property name="url" value="jdbc:mysql://rm-bp1rg8y182l43430oo.mysql.rds.aliyuncs.com:3306/zwwPrd?"/>
         <property name="username" value="zww_dba" />
-        <property name="password" value="TFVyhb67*" />-->
+        <property name="password" value="Zxccasdqwe123" />--><!-- 测试用DB连接信息-->
+        <property name="url" value="jdbc:mysql://rm-bp1rg8y182l43430oo.mysql.rds.aliyuncs.com:3306/zww?"/>
+        <property name="username" value="test_user" />
+        <property name="password" value="12345678" />
         <!-- 本地连接IP：localhost，用户名：sys -->
-        <!-- 远程连接IP：192.168.15.115，用户名：user -->
+        <!-- 远程连接IP：192.168.15.115，用户名：user --><!-- 本地用DB连接信息
         <property name="url" value="jdbc:mysql://192.168.15.115:3306/zwwsit?"/>
         <property name="username" value="user" />
-        <property name="password" value="12345678" />
+        <property name="password" value="12345678" />-->
         <!-- 初始化连接大小 -->  
         <property name="initialSize" value="0"></property>  
         <!-- 连接池最大数量 -->  
