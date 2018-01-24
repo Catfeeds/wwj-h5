@@ -15,7 +15,9 @@ import com.zww.user.pojo.UserBasePojo;
 import com.zww.user.repository.PersonalCenterMapper;
 import com.zww.user.service.PersonalCenterService;
 import com.zww.user.vo.UserBaseVo;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PersonalCenterServiceImpl implements PersonalCenterService{
 	@Resource
 	private PersonalCenterMapper personalCenterMapper;
