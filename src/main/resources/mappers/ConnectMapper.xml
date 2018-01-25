@@ -81,5 +81,24 @@
 			AND A.effective ='1'
 	</insert>
 
+	<!-- 更新奖品订单 -->
+	<update id="updatePrizeOrder"
+			parameterType="map">
+		UPDATE
+		${tableName}
+		SET
+		consignee = #{consignee},
+		telephone = #{telephone},
+		message = #{message},
+		address = #{address},
+		`status` = 2
+		WHERE
+		id = #{id}
+		AND
+		effective = '1'
+		AND
+		`status` NOT IN(2, 3, 4, 5)
+	</update>
+
 
 </mapper>
