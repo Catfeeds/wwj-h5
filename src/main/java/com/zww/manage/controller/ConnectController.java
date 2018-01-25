@@ -3,6 +3,8 @@ package com.zww.manage.controller;
 
 import com.zww.manage.service.ConnectService;
 import com.zww.manage.vo.AwardRecordsVo;
+import com.zww.user.vo.ParamVo;
+import com.zww.user.vo.UserAwardRecords1Vo;
 import com.zww.util.AppResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,6 +46,26 @@ public class ConnectController {
             app.setRetnCode(000);
             app.setRetnDesc("error");
         }
+        return app;
+    }
+    /**
+     * 申请发货
+     *
+     * @param vo
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/delivery", method = RequestMethod.POST)
+    public AppResponseBody delivery(@RequestBody UserAwardRecords1Vo vo, HttpServletRequest request){
+
+        ParamVo paramVo = connectService.inputPrizeOrder(vo);
+
+        AppResponseBody app = new AppResponseBody();
+
+        app.setData(paramVo);
+        app.setRetnCode(200);
+
         return app;
     }
 }

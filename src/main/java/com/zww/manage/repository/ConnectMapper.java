@@ -4,6 +4,8 @@ import com.zww.manage.pojo.AwardRecordsPojo;
 import com.zww.manage.pojo.FinalResultPojo;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
 @Component
 public interface ConnectMapper {
 
@@ -21,5 +23,12 @@ public interface ConnectMapper {
 	 * @return
 	 */
 	public int insertMachineAwardRecords(AwardRecordsPojo pojo);
+
+	/**
+	 * 奖品订单信息填写
+	 * @param map
+	 * @return
+	 */
+	public int updatePrizeOrder(Map<String, Object> map);
 	
 }
