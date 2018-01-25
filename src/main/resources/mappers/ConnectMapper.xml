@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zww.manage.repository.ConnectMapper" >
+	
+	<!-- 插入用户获奖记录表 -->
+	<insert id="insertUserAwardRecords"
+		parameterType="com.zww.manage.pojo.AwardRecordsPojo">
+		INSERT INTO 
+			${userTableName} 
+		(
+			user_id,
+			machine_id,
+			prize_id,
+			prize_name,
+			prize_number,
+			status,
+			value,
+			courier_company,
+			courier_number,
+			consignee,
+			telephone,
+			message,
+			address,
+			effective
+		)
+ 			SELECT
+	 			#{userId},
+				A.id,
+				B.id,
+				B.prize_name,
+				B.id,
+				'1',
+				B.exchange,
+				'',
+				'',
+				'',
+				'',
+				'',
+				'',
+				'1'
+			FROM
+				machine A
+			LEFT JOIN 
+				prize B
+			ON
+				A.prize_id = B.id
+			WHERE 
+				A.id = #{macId}
+			AND A.effective ='1'
+	</insert>
+
+	<!-- 插入机器获奖记录表 -->
+	<insert id="insertMachineAwardRecords"
+		parameterType="com.zww.manage.pojo.AwardRecordsPojo">
+		INSERT INTO 
+			${macTableName} 
+		(
+			user_id,
+			machine_id,
+			prize_id,
+			user_name,
+			effective
+		)
+	 		SELECT
+	 			#{userId},
+				A.id,
+				B.id,
+				C.user_name,
+				'1'
+			FROM
+				machine A
+			LEFT JOIN 
+				prize B
+			ON
+				A.prize_id = B.id
+			LEFT JOIN
+				user_base C
+			ON ${userId} = C.user_id
+			WHERE 
+				A.id = #{macId}
+			AND A.effective ='1'
+	</insert>
+
+
+</mapper>
