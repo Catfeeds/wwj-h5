@@ -6,7 +6,9 @@ import java.util.Map;
 import com.zww.user.pojo.UserAwardRecords1Pojo;
 import com.zww.user.pojo.UserBasePojo;
 import com.zww.user.vo.UserBaseVo;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface PersonalCenterMapper {
 	
 	/**
