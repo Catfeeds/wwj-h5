@@ -75,7 +75,9 @@ public class ConnectServiceImpl implements ConnectService {
         }
         return paramVo;
     }
-
+    /**
+     * 发货
+     */
     @Override
     public ParamVo updateDeliverOrder(UserAwardRecords1Vo vo) {
         Map<String, Object> map = new HashMap<>();
@@ -99,7 +101,9 @@ public class ConnectServiceImpl implements ConnectService {
         }
         return paramVo;
     }
-
+    /**
+     * 确认收货
+     */
     @Override
     public ParamVo confirmReceiving(UserAwardRecords1Vo vo) {
         Map<String, Object> map = new HashMap<>();

@@ -36,6 +36,8 @@ public interface ConnectService {
      * @return
      */
     ParamVo updateDeliverOrder(UserAwardRecords1Vo vo);
+
+
     /**
      * 确认收货
      * @param prizeId

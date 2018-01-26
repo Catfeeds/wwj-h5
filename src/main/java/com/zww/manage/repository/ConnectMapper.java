@@ -36,6 +36,8 @@ public interface ConnectMapper {
 	 * @return
 	 */
 	public int updateDeliverOrder(Map<String, Object> map);
+
+
 	/**
 	 *确认收货
 	 * @param map
