@@ -68,4 +68,45 @@ public class ConnectController {
 
         return app;
     }
+    /**
+     * 发货
+     *
+     * @param vo
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/deliverPrizeHandle", method = RequestMethod.POST)
+    public AppResponseBody deliveryOrder(@RequestBody UserAwardRecords1Vo vo, HttpServletRequest request){
+
+
+        ParamVo paramVo =connectService.updateDeliverOrder(vo);
+        AppResponseBody app = new AppResponseBody();
+
+        app.setData(paramVo);
+        app.setRetnCode(200);
+
+        return app;
+    }
+    /**
+     *
+     *确认收货
+     * @param vo
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/userConfirmReceiving", method = RequestMethod.POST)
+    public AppResponseBody confirmReceiving(@RequestBody UserAwardRecords1Vo vo, HttpServletRequest request){
+
+
+        ParamVo paramVo =connectService.confirmReceiving(vo);
+        AppResponseBody app = new AppResponseBody();
+
+       app.setData(paramVo);
+       app.setRetnCode(200);
+
+        return app;
+    }
+
 }

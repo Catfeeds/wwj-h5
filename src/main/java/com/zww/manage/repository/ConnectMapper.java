@@ -30,5 +30,17 @@ public interface ConnectMapper {
 	 * @return
 	 */
 	public int updatePrizeOrder(Map<String, Object> map);
+	/**
+	 *发货订单
+	 * @param map
+	 * @return
+	 */
+	public int updateDeliverOrder(Map<String, Object> map);
+	/**
+	 *确认收货
+	 * @param map
+	 * @return
+	 */
+	public int confirmReceiving(Map<String, Object> map);
 	
 }
