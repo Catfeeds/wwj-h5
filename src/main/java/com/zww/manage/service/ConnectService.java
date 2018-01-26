@@ -27,4 +27,22 @@ public interface ConnectService {
      * @return
      */
     ParamVo inputPrizeOrder(UserAwardRecords1Vo vo);
+    /**
+     * 发货订单信息填写
+     * @param prizeId
+     * @param userId
+     * @param courierCompany
+     * @param courierNumber
+     * @return
+     */
+    ParamVo updateDeliverOrder(UserAwardRecords1Vo vo);
+
+
+    /**
+     * 确认收货
+     * @param prizeId
+     * @param userId
+     * @return
+     */
+    ParamVo confirmReceiving(UserAwardRecords1Vo vo);
 }

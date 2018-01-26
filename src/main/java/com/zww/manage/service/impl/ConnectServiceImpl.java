@@ -11,7 +11,6 @@ import com.zww.util.TablesUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,4 +75,55 @@ public class ConnectServiceImpl implements ConnectService {
         }
         return paramVo;
     }
+    /**
+     * 发货
+     */
+    @Override
+    public ParamVo updateDeliverOrder(UserAwardRecords1Vo vo) {
+        Map<String, Object> map = new HashMap<>();
+
+        String table = TablesUtils.segmentation(vo.getUserId(), DbConstants.USER_AWARD_RECORDS);
+        map.put("tableName", table);
+        map.put("userId", vo.getUserId());
+        map.put("courierCompany",vo.getCourierCompany());
+        map.put("courierNumber", vo.getCourierNumber());
+        map.put("id", vo.getAwardId());
+        int rows = connectMapper.updateDeliverOrder(map);
+
+        ParamVo paramVo = new ParamVo();
+
+        if (rows > 0) {
+            paramVo.setSign("0");
+            paramVo.setReason("发货成功");
+        }else {
+            paramVo.setSign("1");
+            paramVo.setReason("发货失败!");
+        }
+        return paramVo;
+    }
+    /**
+     * 确认收货
+     */
+    @Override
+    public ParamVo confirmReceiving(UserAwardRecords1Vo vo) {
+        Map<String, Object> map = new HashMap<>();
+
+        String table = TablesUtils.segmentation(vo.getUserId(), DbConstants.USER_AWARD_RECORDS);
+        map.put("tableName", table);
+        map.put("userId", vo.getUserId());
+        map.put("id", vo.getAwardId());
+        int rows = connectMapper.confirmReceiving(map);
+
+        ParamVo paramVo = new ParamVo();
+
+        if (rows > 0) {
+            paramVo.setSign("0");
+            paramVo.setReason("确认收货成功");
+        }else {
+            paramVo.setSign("1");
+            paramVo.setReason("确认收货失败!");
+        }
+        return paramVo;
+    }
+
 }
