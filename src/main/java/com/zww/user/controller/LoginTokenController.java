@@ -1,10 +1,9 @@
 package com.zww.user.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zww.constants.SignConstants;
 import com.zww.user.vo.LoginTokenInputVo;
-import com.zww.user.vo.LoginTokenOutputVo;
 import com.zww.util.UUIDUtil;
-import net.sf.json.JSONObject;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,17 +36,17 @@ public class LoginTokenController {
         String nonce = UUIDUtil.getUUID();
         String expired = String.valueOf(SignConstants.End_LIVE_TIME);
 
-        // 结果
+        // hash生成
         String hash = getMD5(app_id + app_key_32 + id_name + nonce + expired);
 
-        LoginTokenOutputVo result = new LoginTokenOutputVo();
-        result.setVer("1");
-        result.setHash(hash);
-        result.setNonce(nonce);
-        result.setExpired(expired);
+        // base64加密前json生成
+        JSONObject json = new JSONObject(true);
+        json.put("ver", 1);
+        json.put("hash", hash);
+        json.put("nonce", nonce);
+        json.put("expired", SignConstants.End_LIVE_TIME);
 
         // base64加密
-        JSONObject json = JSONObject.fromObject(result);
         String str = json.toString();
 
         return getBase64(str);
@@ -81,7 +80,7 @@ public class LoginTokenController {
             }
             hexStr.append(Integer.toHexString(num));
         }
-        return hexStr.toString().toUpperCase();
+        return hexStr.toString();
     }
 
     // base64加密
