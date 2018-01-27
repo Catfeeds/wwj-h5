@@ -21,7 +21,7 @@
 		LEFT JOIN
 			prize B
 		ON
-			  A.prize_id = B.id
+			A.prize_id = B.id
 		WHERE
 			A.effective = '1'
 		ORDER BY A.update_time  DESC
