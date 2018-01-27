@@ -16,6 +16,7 @@
   	
   	
   	<resultMap id="UserAwardMap" type="com.zww.user.vo.UserAwardRecords1Vo">
+		<result column="user_id" property="userId" />
 	    <result column="prize_id" property="prizeId" />
 	    <result column="prize_name" property="prizeName" />
 	    <result column="prize_number" property="prizeNumber" />
@@ -112,7 +113,26 @@
 		AND 
 			effective = '1'
 	</update>
-	
-	
+
+	<!-- 用户奖品列表 -->
+	<select id="queryUserPrizes"
+			parameterType="map"
+			resultMap="UserAwardMap">
+		SELECT
+		id AS awardId,
+		user_id,
+		prize_id,
+		prize_name,
+		prize_number,
+		`status`,
+		LEFT(create_time, 16) AS prizeTime
+		FROM
+		${tableName}
+		WHERE
+		user_id = ${userId}
+		AND
+		effective = '1'
+		ORDER BY create_time DESC
+	</select>
 	
 </mapper>

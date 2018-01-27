@@ -1,11 +1,13 @@
 package com.zww.user.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
 import com.zww.constants.DbConstants;
+import com.zww.user.vo.UserAwardRecords1Vo;
 import com.zww.util.ConversionUtils;
 import com.zww.util.TablesUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,4 +84,19 @@ public class PersonalCenterServiceImpl implements PersonalCenterService{
 		}
 		return num;
 	}
+	/**
+	 * 奖品列表
+	 * @param userId
+	 * @return
+	 */
+	@Override
+	public List<UserAwardRecords1Vo> prizeList(String userId) {
+		Map<String, String> map = new HashMap<>();
+		String table = TablesUtils.segmentation(userId, DbConstants.USER_AWARD_RECORDS);
+		map.put("tableName", table);
+		map.put("userId", "'" + userId + "'");
+
+		List<UserAwardRecords1Vo> userAwardRecords = personalCenterMapper.queryUserPrizes(map);
+		return userAwardRecords;
 	}
+}

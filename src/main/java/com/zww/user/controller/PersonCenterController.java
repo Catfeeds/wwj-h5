@@ -2,6 +2,7 @@ package com.zww.user.controller;
 
 import com.zww.user.service.PersonalCenterService;
 import com.zww.user.vo.ParamVo;
+import com.zww.user.vo.UserAwardRecords1Vo;
 import com.zww.user.vo.UserBaseVo;
 import com.zww.util.AppResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by Cynthia on 2018/1/24.
@@ -25,7 +27,7 @@ public class PersonCenterController {
      * 修改昵称
      *
      * @param paramVo
-     * @param request }
+     * @param request
      * @return
      */
     @ResponseBody
@@ -38,7 +40,7 @@ public class PersonCenterController {
 
         if (rows != 0) {
             app.setRetnCode(200);
-            app.setRetnDesc("");
+            app.setRetnDesc("OK");
             return app;
         }else {
             app.setRetnCode(200);
@@ -61,10 +63,32 @@ public class PersonCenterController {
 
         AppResponseBody app = new AppResponseBody();
 
-        app.setData(userBase);
+        //app.setData(userBase);
         app.setRetnCode(200);
+        app.setRetnDesc("OK");
 
         return app;
     }
+    /**
+     * 中奖列表
+     *
+     * @param paramVo
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/showUserAwardInfo", method = RequestMethod.POST)
+    public AppResponseBody prizeList(@RequestBody ParamVo paramVo ,HttpServletRequest request){
 
+        List<UserAwardRecords1Vo> userAwardRecords1s = personalCenterService.prizeList(paramVo.getUserId());
+
+        AppResponseBody app = new AppResponseBody();
+
+        //app.setData(userAwardRecords1s);
+        app.setRetnCode(200);
+        app.setRetnDesc("OK");
+
+        return app;
+
+    }
 }

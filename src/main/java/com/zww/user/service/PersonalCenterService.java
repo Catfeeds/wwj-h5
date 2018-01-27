@@ -1,6 +1,9 @@
 package com.zww.user.service;
 
+import com.zww.user.vo.UserAwardRecords1Vo;
 import com.zww.user.vo.UserBaseVo;
+
+import java.util.List;
 
 public interface PersonalCenterService {
 
@@ -26,5 +29,12 @@ public interface PersonalCenterService {
 	 * @return
 	 */
 	public int modifyUserHeadNumber(String userId);
+
+	/**
+	 * 中奖列表
+	 * @param userId
+	 * @return
+	 */
+	public List<UserAwardRecords1Vo> prizeList(String userId);
 	
 }
