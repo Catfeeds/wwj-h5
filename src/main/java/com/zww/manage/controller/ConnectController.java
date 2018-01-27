@@ -63,8 +63,9 @@ public class ConnectController {
 
         AppResponseBody app = new AppResponseBody();
 
-        app.setData(paramVo);
+        //app.setData(paramVo);
         app.setRetnCode(200);
+        app.setRetnDesc("OK");
 
         return app;
     }
@@ -83,8 +84,9 @@ public class ConnectController {
         ParamVo paramVo =connectService.updateDeliverOrder(vo);
         AppResponseBody app = new AppResponseBody();
 
-        app.setData(paramVo);
+        //app.setData(paramVo);
         app.setRetnCode(200);
+        app.setRetnDesc("OK");
 
         return app;
     }
@@ -105,8 +107,9 @@ public class ConnectController {
         ParamVo paramVo =connectService.confirmReceiving(vo);
         AppResponseBody app = new AppResponseBody();
 
-       app.setData(paramVo);
+       //app.setData(paramVo);
        app.setRetnCode(200);
+       app.setRetnDesc("OK");
 
         return app;
     }
