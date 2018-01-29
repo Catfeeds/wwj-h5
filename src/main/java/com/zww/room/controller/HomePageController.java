@@ -2,6 +2,7 @@ package com.zww.room.controller;
 
 import com.zww.room.service.HomePageService;
 import com.zww.room.vo.MachineVo;
+import com.zww.util.AppResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,11 +33,16 @@ public class HomePageController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/show", method = RequestMethod.POST)
-	public List<MachineVo> show(){
-		
+	public AppResponseBody show(){
+
+		// 获取房间一览信息
 		List<MachineVo> machineVos = homePageService.show();
-		
-		return machineVos;
+
+		AppResponseBody app = new AppResponseBody();
+		app.setData(machineVos);
+		app.setRetnCode(200);
+		app.setRetnDesc("OK");
+		return app;
 			
 	}
 	

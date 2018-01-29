@@ -84,7 +84,7 @@ public class PersonCenterController {
 
         AppResponseBody app = new AppResponseBody();
 
-        //app.setData(userAwardRecords1s);
+        app.setData(userAwardRecords1s);
         app.setRetnCode(200);
         app.setRetnDesc("OK");
 
