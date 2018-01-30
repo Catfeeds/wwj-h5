@@ -2,7 +2,10 @@ package com.zww.encode.pojo;
 
 /**
  * 房间配置信息表实体类
- * Created by hp on 2018/1/25.
+ *
+ * @author kuang
+ * @since 2018.01.29
+ * @version 1.0
  */
 public class RoomConfigInfoPojo {
 
