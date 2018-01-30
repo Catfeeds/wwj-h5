@@ -1,4 +1,4 @@
-package com.zww.user.vo;
+package com.zww.encode.vo;
 
 /**
  * LoginToken接口的输入VO

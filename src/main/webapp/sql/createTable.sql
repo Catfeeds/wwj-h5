@@ -7,12 +7,15 @@
 #desc 表名;
 #删除数据表
 #DROP TABLE 表名;
+#往表里插入数据
+#INSERT INTO room_config_info (字段名) VALUES (内容)
 
 ########################################################
 #name:机器表
 #author:kuang
 #date:2018-01-22
 #version:1.0
+#继续用原表结构,该建表语句废止.
 ########################################################
 CREATE TABLE `machine` (
   `machine_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '机器id',
@@ -35,6 +38,7 @@ CREATE TABLE `machine` (
 #author:kuang
 #date:2018-01-22
 #version:1.0
+#继续用原表结构,该建表语句废止.
 ########################################################
 CREATE TABLE `prize` (
   `prize_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '奖品id',
@@ -56,6 +60,7 @@ CREATE TABLE `prize` (
 #author:kuang
 #date:2018-01-22
 #version:1.0
+#继续用原表结构,该建表语句废止.
 ########################################################
 CREATE TABLE `machine_award_info_1` (
   `machine_award_id` varchar(32) NOT NULL COMMENT '主键id',
@@ -75,6 +80,7 @@ CREATE TABLE `machine_award_info_1` (
 #author:kuang
 #date:2018-01-22
 #version:1.0
+#继续用原表结构,该建表语句废止.
 ########################################################
 CREATE TABLE `user_oper_info_1` (
   `user_oper_id` varchar(32) NOT NULL COMMENT '主键id',
@@ -97,6 +103,7 @@ CREATE TABLE `user_oper_info_1` (
 #date:2018-01-22
 #update:2018-01-23
 #version:1.0
+#继续用原表结构,该建表语句废止.
 ########################################################
 CREATE TABLE `user_info` (
   `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
@@ -124,6 +131,7 @@ CREATE TABLE `user_info` (
 #author:kuang
 #date:2018-01-23
 #version:1.0
+#继续用原表结构,该建表语句废止.
 ########################################################
 CREATE TABLE `user_award_delivery_info_1` (
   `info_id` varchar(32) NOT NULL COMMENT '主键id',
@@ -145,3 +153,38 @@ CREATE TABLE `user_award_delivery_info_1` (
   `update_by` varchar(32) NOT NULL DEFAULT 'sys' COMMENT '更新者',
   PRIMARY KEY (`info_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT='获奖发货记录表';
+
+########################################################
+#name:房间配置信息表
+#author:kuang
+#date:2018-01-29
+#version:1.0
+########################################################
+CREATE TABLE `room_config_info` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `machine_id` bigint(20) NOT NULL COMMENT '机器表的主键id',
+  `game_time` int(3) NOT NULL DEFAULT '30' COMMENT '游戏总时长',
+  `claw_power_grab` int(3) NOT NULL DEFAULT '67' COMMENT '表示抓起爪力(1—100)',
+  `claw_power_up` int(3) NOT NULL DEFAULT '33' COMMENT '表示到顶爪力(1—100)',
+  `claw_power_move` int(3) NOT NULL DEFAULT '21' COMMENT '表示移动爪力(1—100)',
+  `up_height` int(2) NOT NULL DEFAULT '7' COMMENT '抓起高度（0–10）底部到顶部分成10份',
+  `effective` tinyint(1) NOT NULL DEFAULT '1' COMMENT '可用标志，1-可用，0-不可用',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT='获奖发货记录表';
+
+#往[房间配置信息表]里插数据
+INSERT INTO room_config_info (
+  machine_id,
+  game_time,
+  claw_power_grab,
+  claw_power_up,
+  claw_power_move,
+  up_height) VALUES (
+  31,
+  40,
+  80,
+  45,
+  37,
+  8);
