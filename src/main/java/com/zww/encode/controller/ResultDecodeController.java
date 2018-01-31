@@ -47,7 +47,7 @@ public class ResultDecodeController {
         String plaintext = objectPt.toString();
 
         // 解密操作
-        byte[] resultByte = null;
+        byte[] resultByte;
         String decodeResult = null;
         try {
             resultByte = AESUtil.decrypt(inputVo.getEncryptedResult(), SignConstants.SERVERSECRECT.getBytes("UTF-8"));

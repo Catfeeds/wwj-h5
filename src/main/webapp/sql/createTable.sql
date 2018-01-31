@@ -9,6 +9,9 @@
 #DROP TABLE 表名;
 #往表里插入数据
 #INSERT INTO room_config_info (字段名) VALUES (内容)
+#修改表结构,增加表字段,在哪个字段之后
+#ALTER TABLE table_name
+#ADD column_name datatype [AFTER column_name]
 
 ########################################################
 #name:机器表
@@ -172,9 +175,9 @@ CREATE TABLE `room_config_info` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT='获奖发货记录表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT='房间配置信息表';
 
-#往[房间配置信息表]里插数据
+#往[房间配置信息表]里插数据,测试用
 INSERT INTO room_config_info (
   machine_id,
   game_time,
@@ -188,3 +191,23 @@ INSERT INTO room_config_info (
   45,
   37,
   8);
+
+#修改用户登录表,user_login,增加字段:用户电话[user_tel],第三方用户登录ID[login_id]
+ALTER TABLE user_login
+ADD login_id varchar(60) COMMENT '第三方用户登录ID' AFTER token_id,
+ADD user_tel varchar(60) COMMENT '用户电话' AFTER login_id;
+
+#修改个人资料表,user_base,增加字段:用户渠道[user_login_channel],用户付费标记[user_pay_flag]
+#用户积分值[user_point]
+ALTER TABLE user_base
+ADD `user_login_channel` varchar(10) DEFAULT 'APP' COMMENT '用户登录渠道:APP,H5' AFTER exchange_code,
+ADD `user_pay_flag` tinyint(1) DEFAULT '0' COMMENT '用户付费标记，1-付费，0-非付费' AFTER user_login_channel,
+ADD `user_point` int(10) DEFAULT '0' COMMENT '用户积分值' AFTER red_packet_value;
+
+#往表[金币套餐表]里增加记录
+INSERT INTO `gold_package` (`package_no`,`actual_gold`,`pay_amt`,`effective`) VALUES ('10','60','6.00','1');
+INSERT INTO `gold_package` (`package_no`,`actual_gold`,`pay_amt`,`effective`) VALUES ('11','300','30.00','1');
+INSERT INTO `gold_package` (`package_no`,`actual_gold`,`pay_amt`,`effective`) VALUES ('12','1180','98.00','1');
+INSERT INTO `gold_package` (`package_no`,`actual_gold`,`pay_amt`,`effective`) VALUES ('13','3980','298.00','1');
+INSERT INTO `gold_package` (`package_no`,`actual_gold`,`pay_amt`,`effective`) VALUES ('14','9980','698.00','1');
+INSERT INTO `gold_package` (`package_no`,`actual_gold`,`pay_amt`,`effective`) VALUES ('15','99999','4999.00','1');

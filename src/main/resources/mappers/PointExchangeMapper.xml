@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zww.trade.repository.PointExchangeMapper" >
+
+	<!-- 查询出积分兑换套餐列表 -->
+	<select id="queryGoldPackageList"
+		resultType="com.zww.trade.pojo.GoldPackagePojo">
+		SELECT
+			A.id AS id,
+			A.package_no AS packageNo,
+			A.actual_gold AS actualGold,
+			A.pay_amt AS payAmt
+		FROM
+			gold_package  A
+		WHERE
+			A.effective = '1'
+			AND A.package_no >= 10
+		ORDER BY A.package_no
+	</select>
+
+	<!-- 更新用户积分值 -->
+	<update id="updatePetName"
+			parameterType="map">
+		UPDATE
+			user_base
+		SET
+			user_point = #{point}
+		WHERE
+			user_id = #{userId}
+		  	AND effective = '1'
+	</update>
+
+	<!-- 查询用户当前金币数 -->
+	<select id="queryUserGold"
+			parameterType="java.lang.String"
+			resultType="int">
+		SELECT
+			gold
+		FROM
+			user_base
+		WHERE
+			effective = '1'
+			AND user_id = #{userId}
+	</select>
+
+	<!-- 更新用户金币、积分值 -->
+	<update id="updatePetName"
+			parameterType="map">
+		UPDATE
+			user_base
+		SET
+			user_point = #{point},
+			gold = #{gold}
+		WHERE
+			user_id = #{userId}
+			AND effective = '1'
+	</update>
+
+	<!-- 增加兑换积分记录 -->
+	<insert id="insertUserRechargeRecords"
+			parameterType="com.zww.trade.pojo.UserRechargeRecordsPojo"
+			useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		INTO
+			${tableName}
+		(
+			user_id,
+			amt,
+			number,
+			out_number,
+			kind,
+			status,
+			billExplain,
+			effective
+		)
+		VALUES
+		(
+			#{userId},
+			#{amt},
+			#{number},
+			'',
+			#{kind},
+			'1',
+			#{billExplain},
+			'1'
+		)
+	</insert>
+
+</mapper>
