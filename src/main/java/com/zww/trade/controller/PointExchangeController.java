@@ -3,13 +3,17 @@ package com.zww.trade.controller;
 import com.zww.trade.service.PointExchangeService;
 import com.zww.trade.vo.PointExchangeHandleInputVo;
 import com.zww.trade.vo.PointExchangeHandleOutputVo;
+import com.zww.trade.vo.PointExchangeRecordsOutputVo;
 import com.zww.trade.vo.PointHomePageOutputVo;
+import com.zww.util.AppResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * 用户积分兑换功能
@@ -46,5 +50,22 @@ public class PointExchangeController {
     public PointExchangeHandleOutputVo pointExchangeHandle(@RequestBody PointExchangeHandleInputVo param) {
         PointExchangeHandleOutputVo outputVo = pointExchangeService.pointExchangeHandle(param);
         return outputVo;
+    }
+
+    /**
+     * 用户积分兑换账单展示
+     * @param userId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getUserPointExchangeRecords", method = RequestMethod.POST)
+    public AppResponseBody getUserPointExchangeRecords(@RequestBody String userId) {
+        List<PointExchangeRecordsOutputVo> data = pointExchangeService.queryUserRechargeRecords(userId);
+
+        AppResponseBody app = new AppResponseBody();
+        app.setData(data);
+        app.setRetnCode(200);
+        app.setRetnDesc("OK");
+        return app;
     }
 }

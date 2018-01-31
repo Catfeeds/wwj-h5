@@ -20,7 +20,7 @@
 	</select>
 
 	<!-- 更新用户积分值 -->
-	<update id="updatePetName"
+	<update id="updateUserPoint"
 			parameterType="map">
 		UPDATE
 			user_base
@@ -45,7 +45,7 @@
 	</select>
 
 	<!-- 更新用户金币、积分值 -->
-	<update id="updatePetName"
+	<update id="updateUserGoldAndPoint"
 			parameterType="map">
 		UPDATE
 			user_base
@@ -86,5 +86,38 @@
 			'1'
 		)
 	</insert>
+
+	<!-- 根据用户ID获取积分兑换记录(一年内的) -->
+	<select id="queryUserRechargeRecords"
+			parameterType="map"
+			resultType="com.zww.trade.vo.PointExchangeRecordsOutputVo">
+		SELECT
+			id AS id,
+			user_id AS userId,
+			amt,
+			number,
+			CONCAT('娃娃币X',billExplain) AS billExplain,
+			kind,
+			status,
+			date_format(update_time, '%Y-%m-%d %H:%I:%S') AS updateTime,
+			(
+				CASE WHEN kind = 2 THEN '积分兑换'
+				ELSE '' END
+			) AS kindName,
+			(
+				CASE WHEN status = 1 THEN '支付成功'
+					  WHEN status = 0 THEN '支付失败'
+				ELSE '' END
+			) AS statusName
+		FROM
+			${tableName}
+		WHERE
+			user_id = #{userId}
+			<![CDATA[
+				AND date_format(update_time, '%Y-%m-%d') >= date_format(date_add(now(), interval -1 year), '%Y-%m-%d')
+			]]>
+			AND effective = '1'
+		ORDER BY update_time DESC
+	</select>
 
 </mapper>

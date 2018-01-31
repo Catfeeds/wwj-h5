@@ -8,6 +8,7 @@ import com.zww.trade.repository.PointExchangeMapper;
 import com.zww.trade.service.PointExchangeService;
 import com.zww.trade.vo.PointExchangeHandleInputVo;
 import com.zww.trade.vo.PointExchangeHandleOutputVo;
+import com.zww.trade.vo.PointExchangeRecordsOutputVo;
 import com.zww.trade.vo.PointHomePageOutputVo;
 import com.zww.util.TablesUtils;
 import com.zww.util.UUIDUtil;
@@ -131,5 +132,23 @@ public class PointExchangeServiceImpl implements PointExchangeService {
         }
 
         return outputVo;
+    }
+
+    /**
+     * 根据用户ID获取积分兑换记录
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<PointExchangeRecordsOutputVo> queryUserRechargeRecords(String userId) {
+
+        Map<String, String> map = new HashMap<>();
+        String table = TablesUtils.segmentation(userId, DbConstants.USER_RECHARGE_RECORDS);
+        map.put("tableName", table);
+        map.put("userId", userId);
+
+        // 获取积分兑换记录
+        List<PointExchangeRecordsOutputVo> resultList = pointExchangeMapper.queryUserRechargeRecords(map);
+        return resultList;
     }
 }

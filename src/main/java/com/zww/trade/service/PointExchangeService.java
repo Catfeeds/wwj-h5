@@ -2,7 +2,10 @@ package com.zww.trade.service;
 
 import com.zww.trade.vo.PointExchangeHandleInputVo;
 import com.zww.trade.vo.PointExchangeHandleOutputVo;
+import com.zww.trade.vo.PointExchangeRecordsOutputVo;
 import com.zww.trade.vo.PointHomePageOutputVo;
+
+import java.util.List;
 
 /**
  * 用户积分兑换功能Service
@@ -26,5 +29,12 @@ public interface PointExchangeService {
 	 * @return
 	 */
 	PointExchangeHandleOutputVo pointExchangeHandle(PointExchangeHandleInputVo param);
+
+	/**
+	 * 根据用户ID获取积分兑换记录
+	 * @param userId
+	 * @return
+	 */
+	List<PointExchangeRecordsOutputVo> queryUserRechargeRecords(String userId);
 	
 }

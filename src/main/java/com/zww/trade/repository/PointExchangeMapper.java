@@ -2,6 +2,7 @@ package com.zww.trade.repository;
 
 import com.zww.trade.pojo.GoldPackagePojo;
 import com.zww.trade.pojo.UserRechargeRecordsPojo;
+import com.zww.trade.vo.PointExchangeRecordsOutputVo;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -50,5 +51,12 @@ public interface PointExchangeMapper {
 	 * @param pojo
 	 */
 	int insertUserRechargeRecords(UserRechargeRecordsPojo pojo);
+
+	/**
+	 * 根据用户ID获取积分兑换记录
+	 * @param map
+	 * @return
+	 */
+	List<PointExchangeRecordsOutputVo> queryUserRechargeRecords(Map<String, String> map);
 	
 }
