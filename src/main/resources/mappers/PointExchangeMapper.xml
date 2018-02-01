@@ -87,6 +87,18 @@
 		)
 	</insert>
 
+	<!-- 更新个人资料表的字段【用户付费标记】为1-付费 -->
+	<update id="updateUserBasePayFlag"
+			parameterType="java.lang.String">
+		UPDATE
+			user_base
+		SET
+			user_pay_flag = 1
+		WHERE
+			user_id = #{userId}
+			AND effective = '1'
+	</update>
+
 	<!-- 根据用户ID获取积分兑换记录(一年内的) -->
 	<select id="queryUserRechargeRecords"
 			parameterType="map"

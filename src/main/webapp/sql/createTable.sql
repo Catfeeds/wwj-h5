@@ -211,3 +211,35 @@ INSERT INTO `gold_package` (`package_no`,`actual_gold`,`pay_amt`,`effective`) VA
 INSERT INTO `gold_package` (`package_no`,`actual_gold`,`pay_amt`,`effective`) VALUES ('13','3980','298.00','1');
 INSERT INTO `gold_package` (`package_no`,`actual_gold`,`pay_amt`,`effective`) VALUES ('14','9980','698.00','1');
 INSERT INTO `gold_package` (`package_no`,`actual_gold`,`pay_amt`,`effective`) VALUES ('15','99999','4999.00','1');
+
+#修改机器表，加入即构配置的房间相关信息，增加字段：房间ID【room_id】,房间名【room_name】
+ALTER TABLE machine
+ADD room_id varchar(32) COMMENT '房间ID,对接即构用',
+ADD room_name varchar(32) COMMENT '房间名,对接即构用';
+
+#机器表的测试数据追加，加入即构分配的房间信息。
+INSERT INTO `machine` (
+  `id`,
+  `prize_id`,
+  `machine_status`,
+  `red_packet_status`,
+  `effective`,
+  `mac_add`,
+  `push1`,
+  `push2`,
+  `room_id`,
+  `room_name`
+)
+VALUES
+  (
+    '32',
+    '32',
+    '1',
+    '0',
+    '1',
+    '3A 54 7B 54 FB 03',
+    'WWJ_ZEGO_STREAM_325eb141d299_2',
+    'WWJ_ZEGO_STREAM_325eb141d299',
+    'WWJ_ZEGO_325eb141d299_No.1',
+    'WWJ_ZEGO_325eb141d299_No.1'
+  );

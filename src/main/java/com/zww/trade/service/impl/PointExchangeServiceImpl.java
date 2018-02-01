@@ -129,6 +129,13 @@ public class PointExchangeServiceImpl implements PointExchangeService {
             outputVo.setUserPoint(userPoint);
             outputVo.setRetnCode(200);
             outputVo.setRetnDesc("充值成功！");
+
+            // 更新个人资料表的字段【用户付费标记】为1-付费
+            int update = pointExchangeMapper.updateUserBasePayFlag(param.getUserId());
+            if (update != 1) {
+                outputVo.setRetnCode(000);
+                outputVo.setRetnDesc("更新用户付费标记字段失败！");
+            }
         }
 
         return outputVo;

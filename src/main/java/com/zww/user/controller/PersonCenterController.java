@@ -1,6 +1,7 @@
 package com.zww.user.controller;
 
 import com.zww.user.service.PersonalCenterService;
+import com.zww.user.vo.AddUserInfoInputVo;
 import com.zww.user.vo.ParamVo;
 import com.zww.user.vo.UserAwardRecords1Vo;
 import com.zww.user.vo.UserBaseVo;
@@ -90,5 +91,18 @@ public class PersonCenterController {
 
         return app;
 
+    }
+
+    /**
+     * 个人信息追加
+     * @param vo
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/addUserInfo", method = RequestMethod.POST)
+    public AppResponseBody addUserInfo(@RequestBody AddUserInfoInputVo vo) {
+        AppResponseBody app = personalCenterService.addUserInfo(vo);
+
+        return app;
     }
 }

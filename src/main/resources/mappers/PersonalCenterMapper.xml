@@ -134,5 +134,81 @@
 		effective = '1'
 		ORDER BY create_time DESC
 	</select>
+
+	<!-- 根据第三方用户登录ID获取用户登录表记录条数 -->
+	<select id="queryUserLoginCount"
+			parameterType="java.lang.String"
+			resultMap="int">
+		SELECT
+			id
+		FROM
+			user_login
+		WHERE
+			login_id = #{loginId}
+			AND effective = '1'
+	</select>
+
+	<!-- 追加用户登录表信息  -->
+	<insert id="insertUserLoginInfo"
+			parameterType="com.zww.user.pojo.UserLoginPojo"
+			useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+			user_login
+			(
+				wxopen_id,
+				token_id,
+				login_id,
+				user_tel,
+				effective,
+				unionId
+			)
+		VALUES
+			(
+				'',
+				'',
+				#{loginId},
+				#{userTel},
+				'1',
+				''
+			)
+	</insert>
+
+	<!-- 追加个人资料表信息 -->
+	<insert id="insertUserBaseInfo"
+			parameterType="com.zww.user.pojo.UserBasePojo">
+		INSERT INTO
+			user_base
+			(
+				user_id,
+				user_name,
+				portrait_num,
+				experience,
+				gold,
+				red_packet_value,
+				user_point,
+				invite_code,
+				exchange_code,
+				user_login_channel,
+				user_pay_flag,
+				effective,
+				passwd
+			)
+		VALUES
+			(
+				#{userId},
+				#{userName},
+				#{portraitNum},
+				#{experience},
+				#{gold},
+				#{redPacketValue},
+				#{userPoint},
+				#{inviteCode},
+				#{exchangeCode},
+				#{userLoginChannel},
+				#{userPayFlag},
+				#{effective},
+				#{passwd}
+			)
+	</insert>
 	
 </mapper>

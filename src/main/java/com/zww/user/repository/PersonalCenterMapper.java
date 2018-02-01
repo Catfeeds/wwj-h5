@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.zww.user.pojo.UserAwardRecords1Pojo;
 import com.zww.user.pojo.UserBasePojo;
+import com.zww.user.pojo.UserLoginPojo;
 import com.zww.user.vo.UserAwardRecords1Vo;
 import com.zww.user.vo.UserBaseVo;
 import org.springframework.stereotype.Component;
@@ -65,5 +66,26 @@ public interface PersonalCenterMapper {
 	 * @return
 	 */
 	List<UserAwardRecords1Vo> queryUserPrizes(Map<String , String> map);
+
+	/**
+	 * 根据第三方用户登录ID获取用户登录表记录条数
+	 * @param loginId
+	 * @return
+	 */
+	int queryUserLoginCount(String loginId);
+
+	/**
+	 * 追加用户登录表信息
+	 * @param param
+	 * @return
+	 */
+	int insertUserLoginInfo(UserLoginPojo param);
+
+	/**
+	 * 追加个人资料表信息
+	 * @param param
+	 * @return
+	 */
+	int insertUserBaseInfo(UserBasePojo param);
 	
 }

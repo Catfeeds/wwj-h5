@@ -53,6 +53,13 @@ public interface PointExchangeMapper {
 	int insertUserRechargeRecords(UserRechargeRecordsPojo pojo);
 
 	/**
+	 * 更新个人资料表的字段【用户付费标记】为1-付费
+	 * @param userId
+	 * @return
+	 */
+	int updateUserBasePayFlag(String userId);
+
+	/**
 	 * 根据用户ID获取积分兑换记录
 	 * @param map
 	 * @return
