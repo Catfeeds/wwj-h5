@@ -16,7 +16,7 @@ public class MachineVo implements Serializable {
 	/**
 	 * 房间id
 	 */
-	private String roomId;
+	private String id;
 	
 	/**
 	 * 奖品id
@@ -59,7 +59,38 @@ public class MachineVo implements Serializable {
 	private String push2;
 
 	/**
+	 * 房间人数
+	 */
+	private int total;
+
+	/**
+	 * 房间ID,对接即构用
+	 */
+	private String roomId;
+
+	/**
+	 * 房间名,对接即构用
+	 */
+	private String roomName;
+
+	/**
 	 * 房间id
+	 * @return
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * 房间id
+	 * @param id
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * 房间ID,对接即构用
 	 * @return
 	 */
 	public String getRoomId() {
@@ -67,7 +98,7 @@ public class MachineVo implements Serializable {
 	}
 
 	/**
-	 * 房间id
+	 * 房间ID,对接即构用
 	 * @param roomId
 	 */
 	public void setRoomId(String roomId) {
@@ -200,5 +231,37 @@ public class MachineVo implements Serializable {
 	 */
 	public void setPush2(String push2) {
 		this.push2 = push2;
+	}
+
+	/**
+	 * 房间人数
+	 * @return
+	 */
+	public int getTotal() {
+		return total;
+	}
+
+	/**
+	 * 房间人数
+	 * @param total
+	 */
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	/**
+	 * 房间名,对接即构用
+	 * @return
+	 */
+	public String getRoomName() {
+		return roomName;
+	}
+
+	/**
+	 * 房间名,对接即构用
+	 * @param roomName
+	 */
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
 	}
 }

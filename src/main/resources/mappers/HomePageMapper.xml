@@ -7,7 +7,7 @@
 	<select id="queryMachineList"
 		resultType="com.zww.room.vo.MachineVo">
 		SELECT
-			A.id AS roomId,
+			A.id,
 			A.prize_id AS prizeId,
 			A.machine_status AS machineStatus,
 			A.push1 AS push1,
@@ -15,7 +15,9 @@
 			A.red_packet_status AS redPacketStatus,
 			B.prize_name AS prizeName,
 			B.introduce AS prizeContext,
-			B.consume AS playValue
+			B.consume AS playValue,
+			A.room_id AS roomId,
+			A.room_name AS roomName
 		FROM
 			machine  A
 		LEFT JOIN

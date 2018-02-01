@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 定时器任务
@@ -29,6 +30,16 @@ public class Timer {
 	public void timerTask() {
 		
 		List<MachineVo> list = homePageMapper.queryMachineList();
+
+		Map<String, String> countMap = SignConstants.getRoomUserCount();
+
+		for (MachineVo vo : list) {
+			if (countMap.get(vo.getId()) == null) {
+				vo.setTotal(0);
+			} else {
+				vo.setTotal(Integer.valueOf(countMap.get(vo.getId())));
+			}
+		}
 		
 		SignConstants.MACHINE_INFO_LIST = list;
 	}

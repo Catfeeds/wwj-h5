@@ -3,6 +3,8 @@ package com.zww.constants;
 import com.zww.room.vo.MachineVo;
 
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 标志静态常量
@@ -56,5 +58,23 @@ public class SignConstants {
 	 * 密钥
 	 */
 	public static final String SERVERSECRECT = "b02a4d56edbd2f360847f27fd7dc32d3";
-	
+
+	/**
+	 * 娃娃机数量
+	 */
+	private final static int macNumber = 50;
+
+	/**
+	 * 存储房间人数
+	 */
+	private static Map<String, String> roomUserCount =
+			new ConcurrentHashMap<>(macNumber);
+
+	public static Map<String, String> getRoomUserCount() {
+		return roomUserCount;
+	}
+
+	public static void setRoomUserCount(Map<String, String> roomUserCount) {
+		SignConstants.roomUserCount = roomUserCount;
+	}
 }

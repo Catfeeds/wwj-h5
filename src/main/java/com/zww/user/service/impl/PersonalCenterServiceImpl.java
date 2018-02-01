@@ -7,7 +7,11 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import com.zww.constants.DbConstants;
+import com.zww.user.pojo.UserLoginPojo;
+import com.zww.user.vo.AddUserInfoInputVo;
 import com.zww.user.vo.UserAwardRecords1Vo;
+import com.zww.util.AppResponseBody;
+import com.zww.util.CodeRuleUtils;
 import com.zww.util.ConversionUtils;
 import com.zww.util.TablesUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,5 +102,65 @@ public class PersonalCenterServiceImpl implements PersonalCenterService{
 
 		List<UserAwardRecords1Vo> userAwardRecords = personalCenterMapper.queryUserPrizes(map);
 		return userAwardRecords;
+	}
+
+	/**
+	 * 个人信息追加
+	 * @param vo
+	 * @return
+	 */
+	@Override
+	public AppResponseBody addUserInfo(AddUserInfoInputVo vo) {
+
+		AppResponseBody app = new AppResponseBody();
+
+		// 1、判断该用户是否已经
+		// 根据第三方登录ID获取用户登录表的用户ID
+		int id = personalCenterMapper.queryUserLoginCount(vo.getLoginUserId());
+		if (id != 0) {
+			// 有用户ID
+			app.setData(id);
+			app.setRetnCode(200);
+			app.setRetnDesc("OK");
+		} else {
+			// 无用户ID，追加用户登录信息
+			UserLoginPojo userLoginPojo = new UserLoginPojo();
+			userLoginPojo.setLoginId(vo.getLoginUserId());
+			userLoginPojo.setUserTel(vo.getUserTel());
+			int row1 = personalCenterMapper.insertUserLoginInfo(userLoginPojo);
+
+			// 获取生成的用户ID
+			String userId = String.valueOf(userLoginPojo.getId());
+
+			// 追加个人资料表信息
+			UserBasePojo userBasePojo = new UserBasePojo();
+
+			String inviteCode = CodeRuleUtils.inviteCode(userId);
+
+			userBasePojo.setUserId(userId);
+			userBasePojo.setUserName(vo.getLoginUserName());
+			userBasePojo.setPortraitNum(1);
+			userBasePojo.setExperience(0);
+			userBasePojo.setGold(0);
+			userBasePojo.setRedPacketValue(20);
+			userBasePojo.setUserPoint(0);
+			userBasePojo.setInviteCode(inviteCode);
+			userBasePojo.setExchangeCode("");
+			userBasePojo.setUserLoginChannel("H5");
+			userBasePojo.setUserPayFlag(0);
+			userBasePojo.setEffective(1);
+			userBasePojo.setPasswd("");
+			int row2 = personalCenterMapper.insertUserBaseInfo(userBasePojo);
+
+			if (row1 > 0 && row2 > 0) {
+				app.setData(userId);
+				app.setRetnCode(200);
+				app.setRetnDesc("OK");
+			} else {
+				app.setRetnCode(000);
+				app.setRetnDesc("NG");
+			}
+		}
+		return app;
 	}
 }

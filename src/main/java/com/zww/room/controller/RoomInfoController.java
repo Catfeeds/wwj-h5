@@ -1,9 +1,11 @@
 package com.zww.room.controller;
 
+import com.zww.constants.SignConstants;
 import com.zww.room.service.RoomInfoService;
 import com.zww.room.vo.RoomDetailShowVo;
 import com.zww.room.vo.RoomInfoInputVo;
 import com.zww.room.vo.RoomLatelyAwardRecordsVo;
+import com.zww.room.vo.RoomUserCountVo;
 import com.zww.util.AppResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 房间相关信息展示
@@ -72,6 +75,25 @@ public class RoomInfoController {
         app.setData(result);
         app.setRetnCode(200);
         app.setRetnDesc("该房间最近抓中记录成功获取！");
+        return app;
+    }
+
+    /**
+     * 更新房间人数
+     * @param vo
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateRoomUserCount", method = RequestMethod.POST)
+    public AppResponseBody updateRoomUserCount(@RequestBody RoomUserCountVo vo) {
+
+        Map<String, String> countMap = SignConstants.getRoomUserCount();
+
+        countMap.put(vo.getRoomId(), vo.getTotal());
+
+        AppResponseBody app = new AppResponseBody();
+        app.setRetnCode(200);
+        app.setRetnDesc("房间人数更新成功！");
         return app;
     }
 }
