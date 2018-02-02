@@ -1,8 +1,8 @@
 package com.zww.room.controller;
 
 import com.zww.room.service.HomePageService;
+import com.zww.room.vo.HomePageOutputVo;
 import com.zww.room.vo.MachineVo;
-import com.zww.util.AppResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-
 
 /**
  * 主页面展示
@@ -33,12 +32,12 @@ public class HomePageController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/show", method = RequestMethod.POST)
-	public AppResponseBody show(){
+	public HomePageOutputVo show(){
 
 		// 获取房间一览信息
 		List<MachineVo> machineVos = homePageService.show();
 
-		AppResponseBody app = new AppResponseBody();
+		HomePageOutputVo app = new HomePageOutputVo();
 		app.setData(machineVos);
 		app.setRetnCode(200);
 		app.setRetnDesc("OK");

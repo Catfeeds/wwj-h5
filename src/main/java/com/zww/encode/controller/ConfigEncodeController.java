@@ -8,6 +8,7 @@ import com.zww.encode.vo.ConfigEncodeInputVo;
 import com.zww.util.AESUtil;
 import com.zww.util.EncodeUtils;
 import com.zww.util.UserQueueStatus;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,6 +33,21 @@ public class ConfigEncodeController {
     @ResponseBody
     @RequestMapping(value = "/configEncode", method = RequestMethod.POST)
     public String configEncode(@RequestBody ConfigEncodeInputVo inputVo) {
+
+        // 输入参数检查
+        boolean inputFlag = true;
+        if (inputFlag && StringUtils.isEmpty(inputVo.getSessionId())) {
+            inputFlag = false;
+        }
+        if (inputFlag && (inputVo.getConfirm() != 0 && inputVo.getConfirm() != 1)) {
+            inputFlag = false;
+        }
+        if (inputFlag && inputVo.getTimeStamp() == 0) {
+            inputFlag = false;
+        }
+        if (!inputFlag) {
+            return "";
+        }
 
         // 1、根据房间ID获取游戏配置信息
         RoomConfigInfoPojo roomConfigInfo = configEncodeService.getRoomConfigInfo(inputVo.getRoomId());

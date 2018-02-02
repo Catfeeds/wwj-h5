@@ -51,6 +51,11 @@ public class SignConstants {
 	public static final String APP_ID = "3412959418";
 
 	/**
+	 * server
+	 */
+	public static final String SERVER = "ws://test2-wsliveroom-api.zego.im:8181/ws";
+
+	/**
 	 * 版本号
 	 */
 	public static final int VER = 1;
