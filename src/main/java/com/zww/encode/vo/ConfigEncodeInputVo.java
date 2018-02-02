@@ -1,5 +1,7 @@
 package com.zww.encode.vo;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * 生成config信息接口的输入VO
  *
@@ -28,6 +30,11 @@ public class ConfigEncodeInputVo {
      * 时间戳
      */
     private long timeStamp;
+
+    /**
+     * 用户ID
+     */
+    private String userId;
 
     /**
      * 房间ID
@@ -91,5 +98,21 @@ public class ConfigEncodeInputVo {
      */
     public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    /**
+     * 用户ID
+     * @return
+     */
+    public String getUserId() {
+        return userId;
+    }
+
+    /**
+     * 用户ID
+     * @param userId
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

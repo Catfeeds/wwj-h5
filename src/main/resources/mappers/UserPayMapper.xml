@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zww.trade.repository.UserPayMapper" >
+
+	<!-- 根据房间id查询游戏消耗 -->
+	<select id="queryConsumeByRoomId"
+			parameterType="java.lang.String"
+			resultType="java.lang.Integer">
+		SELECT
+			B.consume AS consume
+		FROM
+			machine A
+			LEFT JOIN
+			prize B
+			ON A.prize_id = B.id
+		WHERE
+			A.id = #{roomId}
+			AND A.effective = '1'
+	</select>
+
+	<!-- 根据用户id查询用户金币 -->
+	<select id="queryGoldByUserId"
+			parameterType="java.lang.String"
+			resultType="java.lang.Integer">
+		SELECT
+			gold
+		FROM
+			user_base
+		WHERE
+			user_id = #{userId}
+			AND effective = '1'
+	</select>
+
+	<!--更新用户金币 -->
+	<update id="updateGoldsByUserId"
+			parameterType="com.zww.user.vo.UserBaseVo">
+		UPDATE
+			user_base
+		SET
+			gold = gold + #{gold},
+			experience = experience + 10
+		WHERE
+			user_id = #{userId}
+			AND	effective = '1'
+	</update>
+
+	<!-- 预设用户抓取表 -->
+	<insert id="insertUserOperationRecords"
+			parameterType="com.zww.trade.pojo.UserOperationRecordsPojo"
+			useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+			${tableName}
+			(
+				user_id,
+				final_result,
+				set_result,
+				machine_id,
+				prize_id,
+				effective
+			)
+		VALUES
+			(
+				#{userId},
+				0,
+				#{setResult},
+				#{machineId},
+				#{prizeId},
+				'1'
+			)
+	</insert>
+
+</mapper>

@@ -3,9 +3,7 @@ package com.zww.encode.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.zww.constants.SignConstants;
 import com.zww.encode.vo.ResultDecodeInputVo;
-import com.zww.util.AESUtil;
-import com.zww.util.AppResponseBody;
-import com.zww.util.UUIDUtil;
+import com.zww.util.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +40,14 @@ public class ResultDecodeController {
         objectPlayer.put("id", inputVo.getId());
         objectPlayer.put("name", inputVo.getName());
         objectPt.put("player", objectPlayer);
-        objectPt.put("custom_token", UUIDUtil.getUUID());// TODO:error，需要从用户session中取得
+        // 获取鉴权信息并设置
+        UserQueueStatus status = SignConstants.getPlaying().get(inputVo.getRoomId());
+        String userId = inputVo.getId() == null ? "" : inputVo.getId();
+        if (status != null && userId.equals(status.getUserId())) {
+            objectPt.put("custom_token", status.getCustomToken());
+        } else {
+            objectPt.put("custom_token", EncodeUtils.getBase64(SignConstants.SERVERSECRECT));
+        }
         objectPt.put("time_stamp", inputVo.getTimeStamp());
         String plaintext = objectPt.toString();
 

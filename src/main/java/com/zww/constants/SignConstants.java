@@ -1,6 +1,7 @@
 package com.zww.constants;
 
 import com.zww.room.vo.MachineVo;
+import com.zww.util.UserQueueStatus;
 
 import java.util.List;
 import java.util.Map;
@@ -70,11 +71,28 @@ public class SignConstants {
 	private static Map<String, String> roomUserCount =
 			new ConcurrentHashMap<>(macNumber);
 
+	/**
+	 * 正在玩玩家队列
+	 *
+	 * key 机器id
+	 * value 玩家状态
+	 */
+	private static Map<String, UserQueueStatus> playing =
+			new ConcurrentHashMap<>(macNumber);
+
 	public static Map<String, String> getRoomUserCount() {
 		return roomUserCount;
 	}
 
 	public static void setRoomUserCount(Map<String, String> roomUserCount) {
 		SignConstants.roomUserCount = roomUserCount;
+	}
+
+	public static Map<String, UserQueueStatus> getPlaying() {
+		return playing;
+	}
+
+	public static void setPlaying(Map<String, UserQueueStatus> playing) {
+		SignConstants.playing = playing;
 	}
 }

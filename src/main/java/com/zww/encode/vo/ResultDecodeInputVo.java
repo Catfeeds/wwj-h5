@@ -40,6 +40,11 @@ public class ResultDecodeInputVo {
     private String encryptedResult;
 
     /**
+     * 房间ID
+     */
+    private String roomId;
+
+    /**
      * session ID
      * @return
      */
@@ -133,5 +138,21 @@ public class ResultDecodeInputVo {
      */
     public void setEncryptedResult(String encryptedResult) {
         this.encryptedResult = encryptedResult;
+    }
+
+    /**
+     * 房间ID
+     * @return
+     */
+    public String getRoomId() {
+        return roomId;
+    }
+
+    /**
+     * 房间ID
+     * @param roomId
+     */
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
     }
 }

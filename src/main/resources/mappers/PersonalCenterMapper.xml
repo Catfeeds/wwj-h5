@@ -138,7 +138,7 @@
 	<!-- 根据第三方用户登录ID获取用户登录表记录条数 -->
 	<select id="queryUserLoginCount"
 			parameterType="java.lang.String"
-			resultMap="int">
+			resultType="java.lang.Integer">
 		SELECT
 			id
 		FROM

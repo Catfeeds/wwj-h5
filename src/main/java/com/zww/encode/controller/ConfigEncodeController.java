@@ -6,7 +6,8 @@ import com.zww.encode.pojo.RoomConfigInfoPojo;
 import com.zww.encode.service.ConfigEncodeService;
 import com.zww.encode.vo.ConfigEncodeInputVo;
 import com.zww.util.AESUtil;
-import com.zww.util.UUIDUtil;
+import com.zww.util.EncodeUtils;
+import com.zww.util.UserQueueStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -63,8 +64,14 @@ public class ConfigEncodeController {
         authorityInfoObject.put("session_id", inputVo.getSessionId());
         authorityInfoObject.put("confirm", inputVo.getConfirm());
         authorityInfoObject.put("time_stamp", inputVo.getTimeStamp());
-//        authorityInfoObject.put("custom_token", 0);// TODO:error，需要从用户session中取得
-        authorityInfoObject.put("custom_token", UUIDUtil.getUUID());//test
+        // 获取鉴权信息并设置
+        UserQueueStatus status = SignConstants.getPlaying().get(inputVo.getRoomId());
+        String userId = inputVo.getUserId() == null ? "" : inputVo.getUserId();
+        if (status != null && userId.equals(status.getUserId())) {
+            authorityInfoObject.put("custom_token", status.getCustomToken());
+        } else {
+            authorityInfoObject.put("custom_token", EncodeUtils.getBase64(SignConstants.SERVERSECRECT));
+        }
 
         // 组装最终的内容
         object.put("game_config", gameConfigObject);

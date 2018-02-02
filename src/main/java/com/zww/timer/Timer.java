@@ -34,10 +34,10 @@ public class Timer {
 		Map<String, String> countMap = SignConstants.getRoomUserCount();
 
 		for (MachineVo vo : list) {
-			if (countMap.get(vo.getId()) == null) {
+			if (countMap.get(vo.getRoomId()) == null) {
 				vo.setTotal(0);
 			} else {
-				vo.setTotal(Integer.valueOf(countMap.get(vo.getId())));
+				vo.setTotal(Integer.valueOf(countMap.get(vo.getRoomId())));
 			}
 		}
 		

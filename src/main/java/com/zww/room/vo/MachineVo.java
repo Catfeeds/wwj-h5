@@ -16,7 +16,7 @@ public class MachineVo implements Serializable {
 	/**
 	 * 房间id
 	 */
-	private String id;
+	private String roomId;
 	
 	/**
 	 * 奖品id
@@ -66,31 +66,15 @@ public class MachineVo implements Serializable {
 	/**
 	 * 房间ID,对接即构用
 	 */
-	private String roomId;
+	private String zegoRoomId;
 
 	/**
 	 * 房间名,对接即构用
 	 */
-	private String roomName;
+	private String zegoRoomName;
 
 	/**
-	 * 房间id
-	 * @return
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * 房间id
-	 * @param id
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	/**
-	 * 房间ID,对接即构用
+	 * 房间ID
 	 * @return
 	 */
 	public String getRoomId() {
@@ -98,7 +82,7 @@ public class MachineVo implements Serializable {
 	}
 
 	/**
-	 * 房间ID,对接即构用
+	 * 房间ID
 	 * @param roomId
 	 */
 	public void setRoomId(String roomId) {
@@ -250,18 +234,34 @@ public class MachineVo implements Serializable {
 	}
 
 	/**
-	 * 房间名,对接即构用
+	 * 房间ID,对接即构用
 	 * @return
 	 */
-	public String getRoomName() {
-		return roomName;
+	public String getZegoRoomId() {
+		return zegoRoomId;
+	}
+
+	/**
+	 * 房间ID,对接即构用
+	 * @param zegoRoomId
+	 */
+	public void setZegoRoomId(String zegoRoomId) {
+		this.zegoRoomId = zegoRoomId;
 	}
 
 	/**
 	 * 房间名,对接即构用
-	 * @param roomName
+	 * @return
 	 */
-	public void setRoomName(String roomName) {
-		this.roomName = roomName;
+	public String getZegoRoomName() {
+		return zegoRoomName;
+	}
+
+	/**
+	 * 房间名,对接即构用
+	 * @param zegoRoomName
+	 */
+	public void setZegoRoomName(String zegoRoomName) {
+		this.zegoRoomName = zegoRoomName;
 	}
 }
