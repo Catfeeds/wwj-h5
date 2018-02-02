@@ -68,11 +68,11 @@ public interface PersonalCenterMapper {
 	List<UserAwardRecords1Vo> queryUserPrizes(Map<String , String> map);
 
 	/**
-	 * 根据第三方用户登录ID获取用户登录表记录条数
+	 * 根据第三方用户登录ID获取用户ID
 	 * @param loginId
 	 * @return
 	 */
-	int queryUserLoginCount(String loginId);
+	int queryUserIdByLoginId(String loginId);
 
 	/**
 	 * 追加用户登录表信息

@@ -135,8 +135,8 @@
 		ORDER BY create_time DESC
 	</select>
 
-	<!-- 根据第三方用户登录ID获取用户登录表记录条数 -->
-	<select id="queryUserLoginCount"
+	<!-- 根据第三方用户登录ID获取用户ID -->
+	<select id="queryUserIdByLoginId"
 			parameterType="java.lang.String"
 			resultType="java.lang.Integer">
 		SELECT

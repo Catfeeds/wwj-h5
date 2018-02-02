@@ -116,7 +116,7 @@ public class PersonalCenterServiceImpl implements PersonalCenterService{
 
 		// 1、判断该用户是否已经
 		// 根据第三方登录ID获取用户登录表的用户ID
-		int id = personalCenterMapper.queryUserLoginCount(vo.getLoginUserId());
+		int id = personalCenterMapper.queryUserIdByLoginId(vo.getLoginUserId());
 		if (id != 0) {
 			// 有用户ID
 			app.setData(id);
