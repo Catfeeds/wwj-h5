@@ -21,15 +21,17 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/manage")
 @Controller
 public class ConnectController {
+
+    @Autowired
+    private ConnectService connectService;
+
     /**
-     * 更新抓取记录
+     * 插入用户、机器的获奖记录
      *
      * @param paramVo
      * @param request
      * @return
      */
-    @Autowired
-    private ConnectService connectService;
     @ResponseBody
     @RequestMapping(value = "/insertAwardRecords", method = RequestMethod.POST)
     public AppResponseBody updateAwardsRecords(@RequestBody AwardRecordsVo paramVo,

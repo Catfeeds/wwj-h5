@@ -3,7 +3,9 @@ package com.zww.encode.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.zww.constants.SignConstants;
 import com.zww.encode.vo.ResultDecodeInputVo;
+import com.zww.room.service.RoomResultService;
 import com.zww.util.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/encode")
 public class ResultDecodeController {
 
+    @Autowired
+    private RoomResultService roomResultService;
+
+    /**
+     * 游戏结果校验
+     * @param inputVo
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/resultDecode", method = RequestMethod.POST)
     public AppResponseBody resultDecode(@RequestBody ResultDecodeInputVo inputVo) {
@@ -63,8 +73,16 @@ public class ResultDecodeController {
 
         // 结果校验
         if (decodeResult.equals(plaintext)) {
-            app.setRetnCode(200);
-            app.setRetnDesc("校验游戏结果成功");
+
+            // 游戏结果处理，更新用户抓取记录、生成用户获奖记录、生成机器获奖记录
+            boolean resultFlag = roomResultService.roomResultHandle(inputVo);
+            if (resultFlag) {
+                app.setRetnCode(200);
+                app.setRetnDesc("校验游戏结果成功");
+            } else {
+                app.setRetnCode(100);
+                app.setRetnDesc("获奖记录保存失败，请联系客服。");
+            }
         } else {
             app.setRetnCode(000);
             app.setRetnDesc("校验游戏结果失败");

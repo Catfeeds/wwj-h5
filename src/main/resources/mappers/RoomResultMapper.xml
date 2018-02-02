@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zww.room.repository.RoomResultMapper" >
+
+	<!-- 更新抓取记录表 -->
+	<update id="updateUserOperationRecords"
+			parameterType="com.zww.manage.pojo.FinalResultPojo">
+		UPDATE
+			${tableName}
+		SET
+			final_result=#{finalResult}
+		WHERE
+			id = #{id}
+			AND effective = '1'
+	</update>
+
+</mapper>

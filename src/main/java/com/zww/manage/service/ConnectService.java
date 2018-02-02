@@ -10,7 +10,7 @@ import com.zww.user.vo.UserAwardRecords1Vo;
 public interface ConnectService {
 
     /**
-     * 更新用户获奖记录
+     * 插入用户机器中奖信息
      * @param userid
      * @param macid
      */
