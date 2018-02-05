@@ -3,7 +3,7 @@ package com.zww.user.vo;
 import java.util.List;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.zww.user.pojo.UserAwardRecords1Pojo;
+import com.zww.user.pojo.UserAwardRecordsPojo;
 
 public class UserBaseVo {
 	private String userId;
@@ -37,13 +37,13 @@ public class UserBaseVo {
 		this.redPacketValue = redPacketValue;
 	}
 
-	private List<UserAwardRecords1Pojo> pictureIds;
+	private List<UserAwardRecordsPojo> pictureIds;
 
-	public List<UserAwardRecords1Pojo> getPictureIds() {
+	public List<UserAwardRecordsPojo> getPictureIds() {
 		return pictureIds;
 	}
 
-	public void setPictureIds(List<UserAwardRecords1Pojo> pictureIds) {
+	public void setPictureIds(List<UserAwardRecordsPojo> pictureIds) {
 		this.pictureIds = pictureIds;
 	}
 

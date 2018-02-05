@@ -6,7 +6,7 @@ import com.zww.manage.pojo.AwardRecordsPojo;
 import com.zww.manage.repository.ConnectMapper;
 import com.zww.manage.service.ConnectService;
 import com.zww.user.vo.ParamVo;
-import com.zww.user.vo.UserAwardRecords1Vo;
+import com.zww.user.vo.UserAwardRecordsVo;
 import com.zww.util.TablesUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,7 +49,7 @@ public class ConnectServiceImpl implements ConnectService {
      * 申请发货
      */
     @Override
-    public ParamVo inputPrizeOrder(UserAwardRecords1Vo vo) {
+    public ParamVo inputPrizeOrder(UserAwardRecordsVo vo) {
 
         Map<String, Object> map = new HashMap<>();
 
@@ -79,7 +79,7 @@ public class ConnectServiceImpl implements ConnectService {
      * 发货
      */
     @Override
-    public ParamVo updateDeliverOrder(UserAwardRecords1Vo vo) {
+    public ParamVo updateDeliverOrder(UserAwardRecordsVo vo) {
         Map<String, Object> map = new HashMap<>();
 
         String table = TablesUtils.segmentation(vo.getUserId(), DbConstants.USER_AWARD_RECORDS);
@@ -105,7 +105,7 @@ public class ConnectServiceImpl implements ConnectService {
      * 确认收货
      */
     @Override
-    public ParamVo confirmReceiving(UserAwardRecords1Vo vo) {
+    public ParamVo confirmReceiving(UserAwardRecordsVo vo) {
         Map<String, Object> map = new HashMap<>();
 
         String table = TablesUtils.segmentation(vo.getUserId(), DbConstants.USER_AWARD_RECORDS);

@@ -87,6 +87,8 @@ public class ResultDecodeController {
             app.setRetnCode(000);
             app.setRetnDesc("校验游戏结果失败");
         }
+        // 清除该房间正在玩列表
+        SignConstants.getPlaying().put(inputVo.getRoomId(), null);
 
         return app;
     }

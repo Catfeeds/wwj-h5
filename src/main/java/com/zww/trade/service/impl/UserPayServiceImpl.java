@@ -38,16 +38,18 @@ public class UserPayServiceImpl implements UserPayService {
         AppResponseBody app = new AppResponseBody();
 
         // 1、根据用户ID查询金币数
-        int golds = userPayMapper.queryGoldByUserId(vo.getUserId());
+        Integer golds = userPayMapper.queryGoldByUserId(vo.getUserId());
+        int goldsInt = golds == null ? golds.intValue() : 0;
 
         // 2、根据房间ID查询游戏消耗
-        int consume = userPayMapper.queryConsumeByRoomId(vo.getRoomId());
+        Integer consume = userPayMapper.queryConsumeByRoomId(vo.getRoomId());
+        int consumeInt = consume == null ? consume.intValue() : 0;
 
         // 3、判断用户金币是否满足该次游戏
-        if (consume <= golds) {
+        if (goldsInt != 0 && consumeInt <= goldsInt) {
             // 满足
             //金币扣除
-            int minusGolds =(consume > 0) ? -consume : consume;
+            int minusGolds =(consumeInt > 0) ? -consumeInt : consumeInt;
 
             UserBasePojo userBasePojo = new UserBasePojo();
             userBasePojo.setGold(minusGolds);

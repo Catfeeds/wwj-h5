@@ -10,23 +10,23 @@ package com.zww.encode.vo;
 public class LoginTokenInputVo {
 
     /**
-     * id_name
+     * 用户ID
      */
-    private String idName;
+    private String userId;
 
     /**
-     * id_name
+     * 用户ID
      * @return
      */
-    public String getIdName() {
-        return idName;
+    public String getUserId() {
+        return userId;
     }
 
     /**
-     * id_name
-     * @param idName
+     * 用户ID
+     * @param userId
      */
-    public void setIdName(String idName) {
-        this.idName = idName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

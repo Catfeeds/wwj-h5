@@ -1,8 +1,6 @@
 package com.zww.encode.service;
 
 import com.zww.encode.pojo.RoomConfigInfoPojo;
-import com.zww.user.vo.ParamVo;
-import com.zww.user.vo.UserAwardRecords1Vo;
 
 /**
  * 生成config信息Service类

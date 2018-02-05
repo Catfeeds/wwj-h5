@@ -4,7 +4,7 @@ package com.zww.manage.controller;
 import com.zww.manage.service.ConnectService;
 import com.zww.manage.vo.AwardRecordsVo;
 import com.zww.user.vo.ParamVo;
-import com.zww.user.vo.UserAwardRecords1Vo;
+import com.zww.user.vo.UserAwardRecordsVo;
 import com.zww.util.AppResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,7 +59,7 @@ public class ConnectController {
      */
     @ResponseBody
     @RequestMapping(value = "/delivery", method = RequestMethod.POST)
-    public AppResponseBody delivery(@RequestBody UserAwardRecords1Vo vo, HttpServletRequest request){
+    public AppResponseBody delivery(@RequestBody UserAwardRecordsVo vo, HttpServletRequest request){
 
         ParamVo paramVo = connectService.inputPrizeOrder(vo);
 
@@ -80,7 +80,7 @@ public class ConnectController {
      */
     @ResponseBody
     @RequestMapping(value = "/deliverPrizeHandle", method = RequestMethod.POST)
-    public AppResponseBody deliveryOrder(@RequestBody UserAwardRecords1Vo vo, HttpServletRequest request){
+    public AppResponseBody deliveryOrder(@RequestBody UserAwardRecordsVo vo, HttpServletRequest request){
 
 
         ParamVo paramVo =connectService.updateDeliverOrder(vo);
@@ -103,7 +103,7 @@ public class ConnectController {
      */
     @ResponseBody
     @RequestMapping(value = "/userConfirmReceiving", method = RequestMethod.POST)
-    public AppResponseBody confirmReceiving(@RequestBody UserAwardRecords1Vo vo, HttpServletRequest request){
+    public AppResponseBody confirmReceiving(@RequestBody UserAwardRecordsVo vo, HttpServletRequest request){
 
 
         ParamVo paramVo =connectService.confirmReceiving(vo);

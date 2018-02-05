@@ -1,10 +1,7 @@
 package com.zww.user.controller;
 
 import com.zww.user.service.PersonalCenterService;
-import com.zww.user.vo.AddUserInfoInputVo;
-import com.zww.user.vo.ParamVo;
-import com.zww.user.vo.UserAwardRecords1Vo;
-import com.zww.user.vo.UserBaseVo;
+import com.zww.user.vo.*;
 import com.zww.util.AppResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,7 +61,7 @@ public class PersonCenterController {
 
         AppResponseBody app = new AppResponseBody();
 
-        //app.setData(userBase);
+        app.setData(userBase);
         app.setRetnCode(200);
         app.setRetnDesc("OK");
 
@@ -81,7 +78,7 @@ public class PersonCenterController {
     @RequestMapping(value = "/showUserAwardInfo", method = RequestMethod.POST)
     public AppResponseBody prizeList(@RequestBody ParamVo paramVo ,HttpServletRequest request){
 
-        List<UserAwardRecords1Vo> userAwardRecords1s = personalCenterService.prizeList(paramVo.getUserId());
+        List<UserAwardRecordsVo> userAwardRecords1s = personalCenterService.prizeList(paramVo.getUserId());
 
         AppResponseBody app = new AppResponseBody();
 
@@ -103,6 +100,29 @@ public class PersonCenterController {
     public AppResponseBody addUserInfo(@RequestBody AddUserInfoInputVo vo) {
         AppResponseBody app = personalCenterService.addUserInfo(vo);
 
+        return app;
+    }
+
+    /**
+     * 获取用户获奖记录状态
+     * @param param
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getUserAwardStatus", method = RequestMethod.POST)
+    public AppResponseBody getUserAwardStatus(@RequestBody ShowUserAwardStatusInputVo param) {
+        AppResponseBody app = new AppResponseBody();
+        if (param != null) {
+            int userId = param.getUserId();
+            int id = param.getId();
+            ShowUserAwardStatusOutputVo data = personalCenterService.getUserAwardStatus(userId, id);
+            app.setData(data);
+            app.setRetnCode(200);
+            app.setRetnDesc("OK");
+        } else {
+            app.setRetnCode(000);
+            app.setRetnDesc("输入参数错误！");
+        }
         return app;
     }
 }

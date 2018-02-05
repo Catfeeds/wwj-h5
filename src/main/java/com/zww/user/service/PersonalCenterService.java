@@ -1,7 +1,8 @@
 package com.zww.user.service;
 
 import com.zww.user.vo.AddUserInfoInputVo;
-import com.zww.user.vo.UserAwardRecords1Vo;
+import com.zww.user.vo.ShowUserAwardStatusOutputVo;
+import com.zww.user.vo.UserAwardRecordsVo;
 import com.zww.user.vo.UserBaseVo;
 import com.zww.util.AppResponseBody;
 
@@ -37,7 +38,7 @@ public interface PersonalCenterService {
 	 * @param userId
 	 * @return
 	 */
-	public List<UserAwardRecords1Vo> prizeList(String userId);
+	public List<UserAwardRecordsVo> prizeList(String userId);
 
 	/**
 	 * 个人信息追加
@@ -45,5 +46,13 @@ public interface PersonalCenterService {
 	 * @return
 	 */
 	AppResponseBody addUserInfo(AddUserInfoInputVo vo);
+
+	/**
+	 * 获取用户获奖记录状态
+	 * @param userId
+	 * @param id
+	 * @return
+	 */
+	ShowUserAwardStatusOutputVo getUserAwardStatus(int userId, int id);
 	
 }

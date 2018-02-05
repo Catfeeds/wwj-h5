@@ -31,7 +31,7 @@ public class LoginTokenController {
         // 参数
         String app_id = SignConstants.APP_ID;
         String app_key_32 = appKey.replaceAll("0x", "").replaceAll(",", "").substring(0, 32);
-        String id_name = loginTokenInputVo.getIdName();
+        String id_name = loginTokenInputVo.getUserId();
         String nonce = UUIDUtil.getUUID();
         String expired = String.valueOf(SignConstants.End_LIVE_TIME);
 

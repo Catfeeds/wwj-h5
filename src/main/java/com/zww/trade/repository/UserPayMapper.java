@@ -2,7 +2,6 @@ package com.zww.trade.repository;
 
 import com.zww.trade.pojo.UserOperationRecordsPojo;
 import com.zww.user.pojo.UserBasePojo;
-import com.zww.user.vo.PrizeVo;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,7 +20,7 @@ public interface UserPayMapper {
      * @param userId
      * @return
      */
-    int queryGoldByUserId(String userId);
+    Integer queryGoldByUserId(String userId);
 
     /**
      * 更新用户金币
@@ -36,7 +35,7 @@ public interface UserPayMapper {
      * @param roomId
      * @return 游戏消耗
      */
-    int queryConsumeByRoomId(String roomId);
+    Integer queryConsumeByRoomId(String roomId);
 
     /**
      * 预设用户抓取表

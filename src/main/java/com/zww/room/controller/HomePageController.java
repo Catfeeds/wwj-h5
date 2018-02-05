@@ -34,13 +34,19 @@ public class HomePageController {
 	@RequestMapping(value = "/show", method = RequestMethod.POST)
 	public HomePageOutputVo show(){
 
+		HomePageOutputVo app = new HomePageOutputVo();
+
 		// 获取房间一览信息
 		List<MachineVo> machineVos = homePageService.show();
 
-		HomePageOutputVo app = new HomePageOutputVo();
-		app.setData(machineVos);
-		app.setRetnCode(200);
-		app.setRetnDesc("OK");
+		if (machineVos != null && !machineVos.isEmpty()) {
+			app.setData(machineVos);
+			app.setRetnCode(200);
+			app.setRetnDesc("OK");
+		} else {
+			app.setRetnCode(000);
+			app.setRetnDesc("NG");
+		}
 		return app;
 			
 	}

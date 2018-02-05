@@ -1,5 +1,9 @@
 package com.zww.user.controller;
 
+import com.zww.constants.SignConstants;
+import com.zww.util.EncodeUtils;
+import com.zww.util.UUIDUtil;
+
 /**
  * Created by kyou on 2018/1/23.
  */
@@ -13,5 +17,8 @@ public class Test {
         System.out.println("修改01.24");
         System.out.println("修改01.24，加入组织！");
         System.out.println("@$%$%^$##%^");
+
+        System.out.println(EncodeUtils.getBase64(UUIDUtil.getUUID()));
+        System.out.println(EncodeUtils.getBase64(SignConstants.SERVERSECRECT));
     }
 }

@@ -3,6 +3,7 @@ package com.zww.timer;
 import com.zww.constants.SignConstants;
 import com.zww.room.repository.HomePageMapper;
 import com.zww.room.vo.MachineVo;
+import com.zww.util.UserQueueStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -34,10 +35,20 @@ public class Timer {
 		Map<String, String> countMap = SignConstants.getRoomUserCount();
 
 		for (MachineVo vo : list) {
+			// 房间人数设置
 			if (countMap.get(vo.getRoomId()) == null) {
 				vo.setTotal(0);
+//				vo.setMachineStatus("0");// TODO:test,error
 			} else {
 				vo.setTotal(Integer.valueOf(countMap.get(vo.getRoomId())));
+//				vo.setMachineStatus("0");// TODO:test,error
+			}
+			// 房间状态设置
+			UserQueueStatus userQueueStatus = SignConstants.getPlaying().get(vo.getRoomId());
+			if (userQueueStatus == null) {
+				vo.setMachineStatus("0");
+			} else {
+				vo.setMachineStatus("1");
 			}
 		}
 		

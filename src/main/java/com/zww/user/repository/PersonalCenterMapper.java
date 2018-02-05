@@ -3,10 +3,11 @@ package com.zww.user.repository;
 import java.util.List;
 import java.util.Map;
 
-import com.zww.user.pojo.UserAwardRecords1Pojo;
+import com.zww.user.pojo.UserAwardRecordsPojo;
 import com.zww.user.pojo.UserBasePojo;
 import com.zww.user.pojo.UserLoginPojo;
-import com.zww.user.vo.UserAwardRecords1Vo;
+import com.zww.user.vo.ShowUserAwardStatusOutputVo;
+import com.zww.user.vo.UserAwardRecordsVo;
 import com.zww.user.vo.UserBaseVo;
 import org.springframework.stereotype.Component;
 
@@ -34,7 +35,7 @@ public interface PersonalCenterMapper {
 	 * @param map
 	 * @return
 	 */
-	List<UserAwardRecords1Pojo> queryUserPrizePic(Map<String, String> map);
+	List<UserAwardRecordsPojo> queryUserPrizePic(Map<String, String> map);
 	
 	
 	/**
@@ -65,7 +66,7 @@ public interface PersonalCenterMapper {
 	 * @param map
 	 * @return
 	 */
-	List<UserAwardRecords1Vo> queryUserPrizes(Map<String , String> map);
+	List<UserAwardRecordsVo> queryUserPrizes(Map<String , String> map);
 
 	/**
 	 * 根据第三方用户登录ID获取用户ID
@@ -87,5 +88,12 @@ public interface PersonalCenterMapper {
 	 * @return
 	 */
 	int insertUserBaseInfo(UserBasePojo param);
+
+	/**
+	 * 获取用户获奖记录状态
+	 * @param map
+	 * @return
+	 */
+	ShowUserAwardStatusOutputVo getUserAwardStatus(Map<String , String> map);
 	
 }

@@ -15,7 +15,7 @@
   	</resultMap>
   	
   	
-  	<resultMap id="UserAwardMap" type="com.zww.user.vo.UserAwardRecords1Vo">
+  	<resultMap id="UserAwardMap" type="com.zww.user.vo.UserAwardRecordsVo">
 		<result column="user_id" property="userId" />
 	    <result column="prize_id" property="prizeId" />
 	    <result column="prize_name" property="prizeName" />
@@ -117,21 +117,30 @@
 	<!-- 用户奖品列表 -->
 	<select id="queryUserPrizes"
 			parameterType="map"
-			resultMap="UserAwardMap">
+			resultType="com.zww.user.vo.UserAwardRecordsVo">
 		SELECT
-		id AS awardId,
-		user_id,
-		prize_id,
-		prize_name,
-		prize_number,
-		`status`,
-		LEFT(create_time, 16) AS prizeTime
+			id AS awardId,
+			user_id AS userId,
+			prize_id AS prizeId,
+			prize_name AS prizeName,
+			prize_number AS prizeNumber,
+			`status` AS prizeStatus,
+			LEFT(create_time, 16) AS prizeTime,
+			machine_id AS machineId,
+			(
+				CASE WHEN status = 1 THEN '寄存中'
+					  WHEN status = 2 THEN '待邮寄'
+					  WHEN status = 3 THEN '邮寄中'
+					  WHEN status = 4 THEN '已签收'
+					  WHEN status = 5 THEN '已兑换'
+				ELSE '' END
+			) AS statusName
 		FROM
-		${tableName}
+			${tableName}
 		WHERE
-		user_id = ${userId}
-		AND
-		effective = '1'
+			user_id = ${userId}
+			AND
+			effective = '1'
 		ORDER BY create_time DESC
 	</select>
 
@@ -210,5 +219,27 @@
 				#{passwd}
 			)
 	</insert>
-	
+
+	<!-- 获取用户获奖记录状态 -->
+	<select id="getUserAwardStatus"
+			parameterType="map"
+			resultType="com.zww.user.vo.ShowUserAwardStatusOutputVo">
+		SELECT
+			`status`,
+			(
+				CASE WHEN status = 1 THEN '寄存中'
+				 	WHEN status = 2 THEN '待邮寄'
+					WHEN status = 3 THEN '邮寄中'
+					WHEN status = 4 THEN '已签收'
+					WHEN status = 5 THEN '已兑换'
+				ELSE '' END
+			) AS statusName
+		FROM
+			${tableName}
+		WHERE
+			user_id = ${userId}
+			AND id =${id}
+			AND effective = '1'
+	</select>
+
 </mapper>

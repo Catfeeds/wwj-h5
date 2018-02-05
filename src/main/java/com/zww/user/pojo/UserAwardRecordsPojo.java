@@ -3,7 +3,7 @@ package com.zww.user.pojo;
  * 用户奖信息
  *
  */
-public class UserAwardRecords1Pojo {
+public class UserAwardRecordsPojo {
 	private String awardId;
 
     private String userId;

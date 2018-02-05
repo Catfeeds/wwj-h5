@@ -7,7 +7,7 @@
 			parameterType="java.lang.String"
 			resultType="java.lang.Integer">
 		SELECT
-			B.consume AS consume
+			IFNULL(B.consume,0) AS consume
 		FROM
 			machine A
 			LEFT JOIN
@@ -23,7 +23,7 @@
 			parameterType="java.lang.String"
 			resultType="java.lang.Integer">
 		SELECT
-			gold
+			IFNULL(gold,0) AS gold
 		FROM
 			user_base
 		WHERE

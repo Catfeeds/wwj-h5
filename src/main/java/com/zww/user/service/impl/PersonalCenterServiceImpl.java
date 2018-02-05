@@ -9,7 +9,8 @@ import javax.annotation.Resource;
 import com.zww.constants.DbConstants;
 import com.zww.user.pojo.UserLoginPojo;
 import com.zww.user.vo.AddUserInfoInputVo;
-import com.zww.user.vo.UserAwardRecords1Vo;
+import com.zww.user.vo.ShowUserAwardStatusOutputVo;
+import com.zww.user.vo.UserAwardRecordsVo;
 import com.zww.util.AppResponseBody;
 import com.zww.util.CodeRuleUtils;
 import com.zww.util.ConversionUtils;
@@ -94,13 +95,13 @@ public class PersonalCenterServiceImpl implements PersonalCenterService{
 	 * @return
 	 */
 	@Override
-	public List<UserAwardRecords1Vo> prizeList(String userId) {
+	public List<UserAwardRecordsVo> prizeList(String userId) {
 		Map<String, String> map = new HashMap<>();
 		String table = TablesUtils.segmentation(userId, DbConstants.USER_AWARD_RECORDS);
 		map.put("tableName", table);
 		map.put("userId", "'" + userId + "'");
 
-		List<UserAwardRecords1Vo> userAwardRecords = personalCenterMapper.queryUserPrizes(map);
+		List<UserAwardRecordsVo> userAwardRecords = personalCenterMapper.queryUserPrizes(map);
 		return userAwardRecords;
 	}
 
@@ -162,5 +163,23 @@ public class PersonalCenterServiceImpl implements PersonalCenterService{
 			}
 		}
 		return app;
+	}
+
+	/**
+	 * 获取用户获奖记录状态
+	 * @param userId
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public ShowUserAwardStatusOutputVo getUserAwardStatus(int userId, int id) {
+		Map<String, String> map = new HashMap<>();
+		String table = TablesUtils.segmentation(String.valueOf(userId), DbConstants.USER_AWARD_RECORDS);
+		map.put("tableName", table);
+		map.put("userId", "'" + userId + "'");
+		map.put("", "'" + id + "'");
+
+		ShowUserAwardStatusOutputVo result = personalCenterMapper.getUserAwardStatus(map);
+		return result;
 	}
 }

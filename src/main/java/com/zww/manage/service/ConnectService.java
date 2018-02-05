@@ -1,8 +1,7 @@
 package com.zww.manage.service;
 
-import com.zww.manage.vo.AwardRecordsVo;
 import com.zww.user.vo.ParamVo;
-import com.zww.user.vo.UserAwardRecords1Vo;
+import com.zww.user.vo.UserAwardRecordsVo;
 
 /**
  * Created by Cynthia on 2018/1/25.
@@ -26,7 +25,7 @@ public interface ConnectService {
      * @param message
      * @return
      */
-    ParamVo inputPrizeOrder(UserAwardRecords1Vo vo);
+    ParamVo inputPrizeOrder(UserAwardRecordsVo vo);
     /**
      * 发货订单信息填写
      * @param prizeId
@@ -35,7 +34,7 @@ public interface ConnectService {
      * @param courierNumber
      * @return
      */
-    ParamVo updateDeliverOrder(UserAwardRecords1Vo vo);
+    ParamVo updateDeliverOrder(UserAwardRecordsVo vo);
 
 
     /**
@@ -44,5 +43,5 @@ public interface ConnectService {
      * @param userId
      * @return
      */
-    ParamVo confirmReceiving(UserAwardRecords1Vo vo);
+    ParamVo confirmReceiving(UserAwardRecordsVo vo);
 }
