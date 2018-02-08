@@ -38,10 +38,8 @@ public class Timer {
 			// 房间人数设置
 			if (countMap.get(vo.getRoomId()) == null) {
 				vo.setTotal(0);
-//				vo.setMachineStatus("0");// TODO:test,error
 			} else {
 				vo.setTotal(Integer.valueOf(countMap.get(vo.getRoomId())));
-//				vo.setMachineStatus("0");// TODO:test,error
 			}
 			// 房间状态设置
 			UserQueueStatus userQueueStatus = SignConstants.getPlaying().get(vo.getRoomId());

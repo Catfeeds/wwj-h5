@@ -243,3 +243,57 @@ VALUES
     'WWJ_ZEGO_325eb141d299_No.1',
     'WWJ_ZEGO_325eb141d299_No.1'
   );
+
+########################################################
+#name:即构回调流创建记录表
+#author:kuang
+#date:2018-02-06
+#version:1.0
+########################################################
+CREATE TABLE `stream_create_info` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `zego_id` bigint(20) COMMENT 'Server端参数 流ID 自增数字 流唯一标识',
+  `live_id` bigint(20) COMMENT 'Server端参数 直播ID 自增数字 直播唯一标识',
+  `channel_id` varchar(255) COMMENT '频道ID 对应客户端RoomID 不超过255字节',
+  `title` varchar(255) COMMENT '标题 不超过255字节',
+  `stream_alias` varchar(255) COMMENT '流名 对应客户端StreamID 不超过255字节',
+  `publish_id` varchar(255) COMMENT '发布者ID 对应客户端UserID 不超过255字节',
+  `publish_name` varchar(255) COMMENT '发布者名字 对应客户端UserName 不超过255字节',
+  `rtmp_url_0` varchar(1024) COMMENT 'RTMP拉流地址 不超过1024字节',
+  `rtmp_url_1` varchar(1024) COMMENT 'RTMP拉流地址 不超过1024字节',
+  `hls_url_0` varchar(1024) COMMENT 'HLS拉流地址 不超过1024字节',
+  `hls_url_1` varchar(1024) COMMENT 'HLS拉流地址 不超过1024字节',
+  `hdl_url_0` varchar(1024) COMMENT 'HDL拉流地址 不超过1024字节',
+  `hdl_url_1` varchar(1024) COMMENT 'HDL拉流地址 不超过1024字节',
+  `pic_url_0` varchar(255) COMMENT '截图地址 不超过255字节',
+  `create_time_zego` bigint(20) COMMENT '创建时间 Uinx时间戳',
+  `timestamp_zego` bigint(20) COMMENT '服务器当前时间 Uinx时间戳',
+  `nonce` varchar(255) COMMENT '随机数',
+  `signature` varchar(255) COMMENT '检验串 见检验说明',
+  `effective` tinyint(1) NOT NULL DEFAULT '1' COMMENT '可用标志，1-可用，0-不可用',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT='即构回调流创建记录表';
+
+########################################################
+#name:即构回调流关闭记录表
+#author:kuang
+#date:2018-02-06
+#version:1.0
+########################################################
+CREATE TABLE `stream_close_info` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `zego_id` bigint(20) COMMENT 'Server端参数 流ID 自增数字 流唯一标识',
+  `type` tinyint(1) COMMENT '关闭类型 0为正常关闭，非0为异常关闭（1为后台超时关闭，2为同一主播直播关闭之前没有关闭的流）',
+  `channel_id` varchar(255) COMMENT '频道ID 对应客户端RoomID 不超过255字节',
+  `stream_alias` varchar(255) COMMENT '流名 对应客户端StreamID 不超过255字节',
+  `third_define_data` varchar(255) COMMENT '第三方自定义数据 默认为空字符串 不超过255字节',
+  `timestamp_zego` bigint(20) COMMENT '服务器当前时间 Uinx时间戳',
+  `nonce` varchar(255) COMMENT '随机数',
+  `signature` varchar(255) COMMENT '检验串 见检验说明',
+  `effective` tinyint(1) NOT NULL DEFAULT '1' COMMENT '可用标志，1-可用，0-不可用',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT='即构回调流关闭记录表';

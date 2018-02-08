@@ -71,8 +71,22 @@ public class ResultDecodeController {
             e.printStackTrace();
         }
 
+        // 调整解密后的JSON明文内容顺序
+        JSONObject objectDr = JSONObject.parseObject(decodeResult);
+        JSONObject objectPl = JSONObject.parseObject(objectDr.get("player").toString());
+        JSONObject decodeResultObject = new JSONObject(true);
+        decodeResultObject.put("session_id", objectDr.get("session_id"));
+        decodeResultObject.put("result", objectDr.get("result"));
+        JSONObject decodeResultObjectPlayer = new JSONObject(true);
+        decodeResultObjectPlayer.put("id", objectPl.get("id"));
+        decodeResultObjectPlayer.put("name", objectPl.get("name"));
+        decodeResultObject.put("player", decodeResultObjectPlayer);
+        decodeResultObject.put("custom_token", objectDr.get("custom_token"));
+        decodeResultObject.put("time_stamp", objectDr.get("time_stamp"));
+        String decodeResultStr = decodeResultObject.toString();
+
         // 结果校验
-        if (decodeResult.equals(plaintext)) {
+        if (decodeResultStr.equals(plaintext)) {
 
             // 游戏结果处理，更新用户抓取记录、生成用户获奖记录、生成机器获奖记录
             boolean resultFlag = roomResultService.roomResultHandle(inputVo);
@@ -88,7 +102,7 @@ public class ResultDecodeController {
             app.setRetnDesc("校验游戏结果失败");
         }
         // 清除该房间正在玩列表
-        SignConstants.getPlaying().put(inputVo.getRoomId(), null);
+        SignConstants.getPlaying().put(inputVo.getRoomId(), new UserQueueStatus("", "", null));
 
         return app;
     }

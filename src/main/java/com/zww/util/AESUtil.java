@@ -41,7 +41,6 @@ public class AESUtil {
         rnd.setSeed(newSeed);
         byte[] ivBytes = new byte[IV_LENGTH];
         rnd.nextBytes(ivBytes);
-//        ivBytes = ("1234567890123456").getBytes("UTF-8");// TODO:test
         IvParameterSpec iv = new IvParameterSpec(ivBytes);
         Cipher cipher = Cipher.getInstance(TRANSFORMATION);
         cipher.init(Cipher.ENCRYPT_MODE, key, iv);
@@ -72,7 +71,6 @@ public class AESUtil {
         byte[] decryptBytes = Base64.decodeBase64(content.getBytes("UTF-8"));
         byte[] ivBytes = new byte[IV_LENGTH];
         System.arraycopy(decryptBytes, 0, ivBytes, 0, IV_LENGTH);
-//        ivBytes = ("1234567890123456").getBytes("UTF-8");// TODO:test
 
         byte[] contentBytes = new byte[decryptBytes.length - IV_LENGTH];
         System.arraycopy(decryptBytes, IV_LENGTH, contentBytes, 0, decryptBytes.length - IV_LENGTH);

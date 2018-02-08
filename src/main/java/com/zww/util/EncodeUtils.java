@@ -29,7 +29,7 @@ public class EncodeUtils {
     }
 
     // 二进制转十六进制
-    public static String bytesToHex(byte[] bytes) {
+    private static String bytesToHex(byte[] bytes) {
         StringBuffer hexStr = new StringBuffer();
         int num;
         for (int i = 0; i < bytes.length; i++) {
@@ -46,7 +46,7 @@ public class EncodeUtils {
     }
 
     // base64加密
-    public static String getBase64(String str){
+    public static String getBase64(String str) {
         byte[] b=null;
         String s=null;
         try {

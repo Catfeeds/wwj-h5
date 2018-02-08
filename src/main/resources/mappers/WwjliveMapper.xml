@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zww.callback.repository.WwjliveMapper" >
+
+	<!-- 追加即构回调流创建记录 -->
+	<insert id="insertStreamCreateInfo"
+			parameterType="com.zww.callback.pojo.StreamCreateInfoPojo">
+		INSERT INTO
+			stream_create_info
+			(
+				zego_id,
+				live_id,
+				channel_id,
+				title,
+				stream_alias,
+				publish_id,
+				publish_name,
+				rtmp_url_0,
+				rtmp_url_1,
+				hls_url_0,
+				hls_url_1,
+				hdl_url_0,
+				hdl_url_1,
+				pic_url_0,
+				create_time_zego,
+				timestamp_zego,
+				nonce,
+				signature
+			)
+		VALUES
+			(
+				#{zego_id},
+				#{live_id},
+				#{channel_id},
+				#{title},
+				#{stream_alias},
+				#{publish_id},
+				#{publish_name},
+				#{rtmp_url_0},
+				#{rtmp_url_1},
+				#{hls_url_0},
+				#{hls_url_1},
+				#{hdl_url_0},
+				#{hdl_url_1},
+				#{pic_url_0},
+				#{create_time_zego},
+				#{timestamp_zego},
+				#{nonce},
+				#{signature}
+			)
+	</insert>
+
+	<!-- 追加即构回调流关闭记录 -->
+	<insert id="insertStreamCloseInfo"
+			parameterType="com.zww.callback.pojo.StreamCloseInfoPojo">
+		INSERT INTO
+			stream_close_info
+			(
+				zego_id,
+				type,
+				channel_id,
+				stream_alias,
+				third_define_data,
+				timestamp_zego,
+				nonce,
+				signature
+			)
+		VALUES
+			(
+				#{zego_id},
+				#{type},
+				#{channel_id},
+				#{stream_alias},
+				#{third_define_data},
+				#{timestamp_zego},
+				#{nonce},
+				#{signature}
+			)
+	</insert>
+
+</mapper>

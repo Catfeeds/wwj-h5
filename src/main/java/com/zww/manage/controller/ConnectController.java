@@ -58,16 +58,21 @@ public class ConnectController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/delivery", method = RequestMethod.POST)
+    @RequestMapping(value = "/userApplyDeliverPrize", method = RequestMethod.POST)
     public AppResponseBody delivery(@RequestBody UserAwardRecordsVo vo, HttpServletRequest request){
-
-        ParamVo paramVo = connectService.inputPrizeOrder(vo);
 
         AppResponseBody app = new AppResponseBody();
 
-        //app.setData(paramVo);
-        app.setRetnCode(200);
-        app.setRetnDesc("OK");
+        if ("".equals(vo.getUserId())) {
+            app.setRetnCode(000);
+            app.setRetnDesc("NG");
+            return app;
+        }
+
+        ParamVo paramVo = connectService.inputPrizeOrder(vo);
+
+        app.setRetnCode("0".equals(paramVo.getSign()) ? 200 : 000);
+        app.setRetnDesc("0".equals(paramVo.getSign()) ? "OK" : "NG");
 
         return app;
     }
@@ -82,13 +87,19 @@ public class ConnectController {
     @RequestMapping(value = "/deliverPrizeHandle", method = RequestMethod.POST)
     public AppResponseBody deliveryOrder(@RequestBody UserAwardRecordsVo vo, HttpServletRequest request){
 
-
-        ParamVo paramVo =connectService.updateDeliverOrder(vo);
         AppResponseBody app = new AppResponseBody();
 
-        //app.setData(paramVo);
-        app.setRetnCode(200);
-        app.setRetnDesc("OK");
+        if ("".equals(vo.getUserId())) {
+            app.setRetnCode(000);
+            app.setRetnDesc("NG");
+            return app;
+        }
+
+
+        ParamVo paramVo =connectService.updateDeliverOrder(vo);
+
+        app.setRetnCode("0".equals(paramVo.getSign()) ? 200 : 000);
+        app.setRetnDesc("0".equals(paramVo.getSign()) ? "OK" : "NG");
 
         return app;
     }
@@ -105,13 +116,18 @@ public class ConnectController {
     @RequestMapping(value = "/userConfirmReceiving", method = RequestMethod.POST)
     public AppResponseBody confirmReceiving(@RequestBody UserAwardRecordsVo vo, HttpServletRequest request){
 
-
-        ParamVo paramVo =connectService.confirmReceiving(vo);
         AppResponseBody app = new AppResponseBody();
 
-       //app.setData(paramVo);
-       app.setRetnCode(200);
-       app.setRetnDesc("OK");
+        if ("".equals(vo.getUserId())) {
+            app.setRetnCode(000);
+            app.setRetnDesc("NG");
+            return app;
+        }
+
+        ParamVo paramVo =connectService.confirmReceiving(vo);
+
+        app.setRetnCode("0".equals(paramVo.getSign()) ? 200 : 000);
+        app.setRetnDesc("0".equals(paramVo.getSign()) ? "OK" : "NG");
 
         return app;
     }

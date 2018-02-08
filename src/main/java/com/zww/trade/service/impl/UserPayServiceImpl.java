@@ -39,11 +39,11 @@ public class UserPayServiceImpl implements UserPayService {
 
         // 1、根据用户ID查询金币数
         Integer golds = userPayMapper.queryGoldByUserId(vo.getUserId());
-        int goldsInt = golds == null ? golds.intValue() : 0;
+        int goldsInt = golds == null ? 0 : golds.intValue();
 
         // 2、根据房间ID查询游戏消耗
         Integer consume = userPayMapper.queryConsumeByRoomId(vo.getRoomId());
-        int consumeInt = consume == null ? consume.intValue() : 0;
+        int consumeInt = consume == null ? 0 : consume.intValue();
 
         // 3、判断用户金币是否满足该次游戏
         if (goldsInt != 0 && consumeInt <= goldsInt) {
