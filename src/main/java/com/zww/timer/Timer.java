@@ -4,6 +4,7 @@ import com.zww.constants.SignConstants;
 import com.zww.room.repository.HomePageMapper;
 import com.zww.room.vo.MachineVo;
 import com.zww.util.UserQueueStatus;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -43,7 +44,7 @@ public class Timer {
 			}
 			// 房间状态设置
 			UserQueueStatus userQueueStatus = SignConstants.getPlaying().get(vo.getRoomId());
-			if (userQueueStatus == null) {
+			if (userQueueStatus == null || StringUtils.isEmpty(userQueueStatus.getUserId())) {
 				vo.setMachineStatus("0");
 			} else {
 				vo.setMachineStatus("1");

@@ -127,6 +127,7 @@
 			`status` AS prizeStatus,
 			LEFT(create_time, 16) AS prizeTime,
 			machine_id AS machineId,
+			value,
 			(
 				CASE WHEN status = 1 THEN '寄存中'
 					  WHEN status = 2 THEN '待邮寄'
